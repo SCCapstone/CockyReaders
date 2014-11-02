@@ -49,7 +49,7 @@
       </dict>
     </dict>
     <key>CFBundleIdentifier</key>
-    <string>com.example.hello</string>
+    <string>edu.sc.cockyreaders</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>

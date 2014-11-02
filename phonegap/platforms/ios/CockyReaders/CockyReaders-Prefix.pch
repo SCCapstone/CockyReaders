@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'HelloWorld' target in the 'HelloWorld' project
+// Prefix header for all source files of the 'CockyReaders' target in the 'CockyReaders' project
 //
 
 #ifdef __OBJC__
