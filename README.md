@@ -4,8 +4,11 @@ This repo represents an ongoing work for CSCE 490. The application, written on t
 
 Group Members:
     Connor Bain
+
     Tiana Langer
+
     John Phillips 
+
     Stephen Stills
 
 To Do:
