@@ -20,5 +20,7 @@ To Do (for this semester):
 	Get ebook reader design finalized
 	Make slides for presentation
 	
+To test our server visit www.cockyreaders-test.appspot.com
 
+To test our app visit www.cse.sc.edu/~bainco/www/
 
