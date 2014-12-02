@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block header %}
+<script type="text/javascript" src="/js/pinDnD.js"></script>
+{% endblock %}
+{% block body %}
+	<div class="displaybox">
+		Enter new pin:<br>
+		<form method="post" action="/pin/">
+     		Image URL:<input type="text" name="imgUrl"/><br>
+      		Caption:<input type="text" name="caption"/><br>    
+      		Private:<input type="checkbox" name="privOpt"/><br>   
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+  	</div>
+  	<br>
+  	<div class="displaybox">
+      
+        <div id="imageArea" align="center"> 
+                      <div id="drop_zone">Or drag image here!</div>
+        
+       </div>
+    </div>
+  	<br>
+	{% for pin in pins %}
+	<div class="displaybox">
+   		<div style="text-align:center;"><a href="/pin/{{ pin.id() }}"><img style="max-height:100px;" src="{{ pin.imgUrl }}"/></a></div>
+   		<p>Pinned on {{ pin.date.date() }}</p>
+   		<p>{{ pin.caption }}</p>
+   </div>
+   <br>
+	{% endfor %}
+{% endblock %}

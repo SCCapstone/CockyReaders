@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block header %}
+    {% if user == board.owner %}
+        <script type="text/javascript" src="/js/boardscript.js"></script>
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <div id="boardDiv">
+    {% if not editor %}
+        {% for pin in boardPins %}
+        <div class="displaybox">
+            <div style="text-align:center;"><a href="/pin/{{ pin.id() }}"><img style="max-height:100px;" src="{{ pin.imgUrl }}"/></a></div>
+            <p>Pin {{ pin.id() }}</p>
+            <p>{{ pin.caption }}</p>
+        </div>
+        <br>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <br>
+    {% if editor %}
+	<div class="displaybox">
+        Title: <span class="editable" id="boardTitle">{{ board.title }}</span><br>
+        Private: <input id="private" type="checkbox" {% if board.private %}checked{% endif %}>
+        <form method="post" action="/board/{{ board.id() }}">
+			<input type="hidden" name="cmd" value="delete"/>
+			<input type="submit" value="Delete this Board" />
+		</form> 
+		<input type="hidden" id="boardID" value="{{ board.id() }}">
+	</div>
+	<br>
+	<div id="pinDiv" class="displaybox"></div>
+	{% else %}
+    <p>{{ board.title }}</p>
+	{% endif %}
+	
+{% endblock %}

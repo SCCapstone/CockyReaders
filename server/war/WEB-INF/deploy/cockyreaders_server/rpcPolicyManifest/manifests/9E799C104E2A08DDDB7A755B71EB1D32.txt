@@ -1,2 +1,0 @@
-serviceClass: edu.sc.cse.cockyreaders.client.GreetingService
-path: D47A23CA1CF0C9A4437943C4982F70C1.gwt.rpc

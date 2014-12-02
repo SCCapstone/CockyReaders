@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link type="text/css" rel="stylesheet" href="/css/style.css" />
+		<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+		{% block header %}
+		{% endblock %}
+		<title>{{ title }}</title>
+	</head>
+	<body>
+		<div id="page">
+			<div id="header">
+				<div class="right">
+					{% if user %}
+						<a href="/board">My Boards</a> - <a href="/pin">My Pins</a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
+					{% else %}
+						<a href='{{ login }}'>Login</a>
+				    {% endif %}
+				
+</div>
+			</div>
+			<div id="title"><h1>{{ title }}</h1></div>
+			<div class="content">
+				{% block body %}
+				{% endblock %}
+    		</div>
+    	</div>
+    	<br>
+    	<div id="footer">Designed by Connor Bain</div>
+	</body>
+</html>

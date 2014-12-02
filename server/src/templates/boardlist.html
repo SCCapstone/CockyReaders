@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="displaybox">
+		Enter new board:<br>
+		<form method="post" action="/board/">
+     		Title:<input type="text" name="title"/><br>
+      		Private:<input type="checkbox" name="private"/><br>
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+  	</div>
+  	<br>
+  	<div class="displaybox">
+  	<ul>
+		{% for board in boards %}
+			<li><a href="/board/{{ board.id() }}">{{ board.title }}</a> (<a href="/canvas/{{ board.id() }}">canvas</a>)</li>
+		{% endfor %}
+	</ul>
+	</div>
+{% endblock %}
