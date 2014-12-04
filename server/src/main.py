@@ -1,7 +1,6 @@
 #Author: Connor P. Bain
-#HW 11
-#Added canvas board
-#Last modified November 26, 2012
+#Code for CockyReaders server-side
+#Last modified December 3, 2014
 
 import logging
 import webapp2
@@ -10,7 +9,6 @@ import os
 
 from google.appengine.api import users
 from google.appengine.ext import db
-from google.storage.speckle.proto.jdbc_type import NULL
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
