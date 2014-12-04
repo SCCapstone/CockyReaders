@@ -3,16 +3,8 @@
 	<div class="displaybox">
 		{% if user %}
    		 	<ul>
-   		 	<li><a href="/pin">My Pins</a></li>
-   		 	<li><a href="/board">My Boards</a></li>
+   		 	<li><a href="/student">My Students</a></li>
    		 	</ul>
-   		 	<br>
-   		 	<p>Grab our <a id="bookmarklet" href="">Pin It</a> bookmarklet and put it on your bookmarks bar.</p>
-   		 	<script>
-   		    link = document.getElementById('bookmarklet');
-   		    link.href = "javascript:(function(){ _my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='http://" 
-   		     + location.host + "/js/bmlet.js?x='+(Math.random());document.getElementsByTagName('head')[0].appendChild(_my_script);})();"
-   		    </script> 
     	{% else %}
     		You must login first.
     	{% endif %}

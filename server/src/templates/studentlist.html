@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="displaybox">
+		Enter new student:<br>
+		<form method="post" action="/student/">
+     		First Name:<input type="text" name="firstName"/><br>
+      		Last Name:<input type="text" name="lastName"/><br>    
+      		Teacher:<input type="text" name="teacher"/><br>  
+      		Grade:<input type="number" min="1" max="5" name="grade"/><br>   
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+  	</div>
+  	<br>
+	{% for student in students %}
+	<div class="displaybox">
+   		<div style="text-align:center;"></div>
+   		<p>{{ student.firstName }} {{ student.lastName }}</p>
+   		<p>Grade: {{ student.grade }}</p>
+   		<p>Teacher: {{ student.teacher }}</p>   		
+   </div>
+   <br>
+	{% endfor %}
+{% endblock %}
