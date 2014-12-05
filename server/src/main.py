@@ -6,9 +6,11 @@ import logging
 import webapp2
 import jinja2
 import os
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import db
+from google.appengine.api.validation import Repeated
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
@@ -47,8 +49,45 @@ class MainPage(webapp2.RequestHandler):
         if theStudent == None:
             self.redirect('/')
             return None
-        return theStudent    
+        return theStudent   
+    
+class BookHandler(MainPage):
+    def get(self, bookID): 
+                
+        self.setupUser()
+        
+        self.setupJSON(bookID)
+        
+     
 
+        query = Book.all();
+        #DEMO CODE
+        if query.count() == 0:
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
+        
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
+ 
+            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
+
+            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
+            
+            query = Book.all()
+        
+        if self.json:
+            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+            self.response.out.headers['Content-Type'] = "text/json"
+            books = []
+            for book in query:
+                books.append(book.dict())
+            self.response.out.write(json.dumps(books))
+            return       
+        
+        
+        
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -82,7 +121,7 @@ class Student(db.Model):
     userName = db.StringProperty()
     teacher = db.StringProperty()
     grade = db.IntegerProperty()
-    bookshelf = db.ListProperty(db.Key, default=[]) 
+    bookshelf = db.Key()
     pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
@@ -100,5 +139,25 @@ class Student(db.Model):
         theStudentDict['pagesRead'] = self.pagesRead
         return theStudentDict
     
+class Book(db.Model):
+    title = db.StringProperty()
+    genre = db.StringProperty()
+    isbn = db.IntegerProperty()
+    cover = db.StringProperty()
+
+    def dict(self):
+        theBookDict = {}
+        theBookDict['title'] = self.title
+        theBookDict['genre'] = self.genre
+        theBookDict['isbn'] = self.isbn
+        theBookDict['cover'] = self.cover
+        return theBookDict
+    
+class Bookshelf(db.Model):
+    books = db.ListProperty(long)
+    sort = db.IntegerProperty() # Sort by this variable
+    positions = db.ListProperty(long)
+    
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
+                               ('/book()', BookHandler),
                                ('/.*', MainPage)], debug=True)

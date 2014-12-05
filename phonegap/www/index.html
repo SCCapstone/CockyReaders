@@ -19,6 +19,8 @@
 -->
 <html>
     <head>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="application/javascript" src="js/bookcase.js"></script>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
@@ -26,7 +28,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
        <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
         <link rel="stylesheet" type="text/css" href="css/bookshelf.css">
-        <title>Hello World</title>
+        <title>Test Student's Bookshelf</title>
     </head>
     <body>
          <table width="100%" style="margin-left:-3px;">
@@ -34,186 +36,21 @@
         <td>
             <span class="bookshelf-title">
                 <a class="bookshelf-name-link">
-                    Test Bookshelf
+                    Test Student's Bookshelf
                 </a>                
             </span>
    
             <div class="grid_11 alpha omega bookshelf-body">
-            <div class="grid_10 alpha omega" style="padding-left:40px">
+            <div id="bookshelf" class="grid_10 alpha omega" style="padding-left:40px">
             
-<span style="float: left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 111px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img onclick="callAnotherPage()" alt="Accountancy 1 Class 12" title="Accountancy 1 Class 12" src="img/book_1.jpg" rel="book_thumb_8" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 116px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Accountancy 1 Class 12
-		</a>
-	    </div></div>
-	</a>
-</div>
-</span>
-            
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">    
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 114px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 1 Class 12" title="Business Studies 1 Class 12" src="img/book_3.jpg" rel="book_thumb_10" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 119px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 1 Class 12
-		</a>
-	    </div></div>
-	</a>
-</div>
-</span>
-            
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_4.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-            
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
-
-<span style="float:left;padding:8px 0px 36px 72px;height:150px;display:block">
-<div style="float: left;">
-	<a href="#">
-	    <div class="caption-wrapper" style="overflow: hidden; padding: 0px; font-size: 0.1px; width: 117px; height: 150px; margin: 5px; border: 0px none rgb(0, 147, 204);"><img alt="Business Studies 2 Class 12" title="Business Studies 2 Class 12" src="img/book_5.jpg" rel="book_thumb_11" class=" captify  book_thumb" style="border: 0px none; margin: 0px;"><div class="caption-bottom" style="margin: 0px; z-index: 1; position: relative; opacity: 0.7; width: 122px; height: 38.40625px;"></div><div class="caption-bottom" style="margin: -52px 0px 0px; padding-top: 9px; position: relative; z-index: 2; background-image: none; border: 0px none; opacity: 1; width: 100%; background-position: initial initial; background-repeat: initial initial;">
-		<a href="#" class="thumblink" style="margin: 0px;">
-		    Business Studies 2 Class 12
-		</a>
-	    </div></div>
-	</a>    
-</div>
-</span>
 
             </div>
             </div>
         </td>
     </tr>
-
-    <tr><td>&nbsp;</td></tr>
 </tbody></table>
-        <script>
-         function callAnotherPage()
-             {
-                window.location = "reader.html";
-             }
-        </script>
         <script type="text/javascript" src="js/cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
         <!--<script type="text/javascript" src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
     </body>
 </html>
