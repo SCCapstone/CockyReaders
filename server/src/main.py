@@ -108,7 +108,7 @@ class StudentHandler(MainPage):
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
 
-        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade))
+        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade), pagesRead = 0)
         newStudent.put()
         newStudent.put()
         
