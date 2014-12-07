@@ -87,7 +87,7 @@ function updateBookcase() {
     }
 }
 
-function getTheBooks() {
+function GET_Books() {
     outAJAX++;
     $.ajax('http://localhost:9080/book', {
         type: 'GET',
@@ -97,6 +97,24 @@ function getTheBooks() {
         success: function(data){			
             bookList = data;
             console.log('Books loaded:');
+        },
+        error: function() {
+            console.log('Error at server:');
+        },
+        complete: checkAJAX
+    });
+}
+
+function POST_Student() {
+    outAJAX++;
+    $.ajax('http://localhost:9080/student', {
+        type: 'POST',
+        data: {
+            fmt: 'json';
+            pageCount: null;
+        },
+        success: function(data){			
+            console.log('Updates sent to server.');
         },
         error: function() {
             console.log('Error at server:');
@@ -139,5 +157,5 @@ var outAJAX = 0;
 
 $(document).ready(function() {
     console.log("ready");
-    getTheBooks();
+    GET_Books();
 });
