@@ -5,20 +5,13 @@ This repo represents an ongoing work for CSCE 490. The application, written on t
 Group Members:
 
     Connor Bain
-
     Tiana Langer
-
     John Phillips 
-
     Stephen Stills
 
 To Do (for this semester):
 
-	Setup users on App Engine
-	Host book on app engine
-	Setup local storage on iPad
-	Get ebook reader design finalized
-	Make slides for presentation
+	Setup local storage on iPad (still having issues)
 	
 To test our server visit www.cockyreaders-test.appspot.com
 
