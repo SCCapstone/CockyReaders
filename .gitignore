@@ -1,2 +1,1 @@
-/server/gwt_unitCache/*
-/server/war/WEB-INF/lib/*
+*.pyc
