@@ -4,10 +4,10 @@ This repo represents an ongoing work for CSCE 492. The application, written on t
 
 Group Members:
 
-    Connor Bain
-    John Phillips 
-    Stephen Stills
-    Andrew Mitchem
+    Connor Bain - Sync Master (and Git Master)
+    John Phillips - Local Master
+    Stephen Stills - Interface Master
+    Andrew Mitchem - Server Master
     Tinana Langer (Graduated Dec. 2014)
 
 Work to be done this semester:
