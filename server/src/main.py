@@ -74,6 +74,7 @@ class BookHandler(MainPage):
             #localHost - host is current where about of mySql instance
             #note the 192.168.1.103 is a standard pc and is not operational 24/7 and for testing purpose
             #please contact mitchea2@email.sc.edu to bring it up
+            #local host redirct is 127.0.0.1 for reverting to normal test mode.
             sqldb = MySQLdb.connect(host='192.168.1.103', port=3306, db='books', user='root', password="readers")
             cursor = sqldb.cursor()
             cursor.execute('SELECT title,genre,isbn,cover FROM book')
