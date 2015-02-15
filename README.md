@@ -8,7 +8,7 @@ Group Members:
     John Phillips - Local Master
     Stephen Stills - Interface Master
     Andrew Mitchem - Server Master
-    Tinana Langer (Graduated Dec. 2014)
+    Tiana Langer (Graduated Dec. 2014)
 
 Work to be done this semester:
 
