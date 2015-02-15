@@ -7,6 +7,7 @@ import webapp2
 import jinja2
 import os
 import json
+import MySQLdb
 
 from google.appengine.api import users
 from google.appengine.ext import db
@@ -63,17 +64,35 @@ class BookHandler(MainPage):
         query = Book.all();
         #DEMO CODE
         if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            newBook.put()
+            #SQL Interface code beta 
+            #currently loads the data into dataStore app engine
+            #standard google test code first statement is live running using google mySqL
+            #if (os.getenv('SERVER_SOFTWARE') and
+                #os.getenv('SERVER_SOFTWARE').startswith('Google App Engine/')):
+                #db = MySQLdb.connect(unix_socket='/cloudsql/' + _INSTANCE_NAME, db='guestbook', user='root')
+            #else:
+            #localHost - host is current where about of mySql instance
+            #note the 192.168.1.103 is a standard pc and is not operational 24/7 and for testing purpose
+            #please contact mitchea2@email.sc.edu to bring it up
+            sqldb = MySQLdb.connect(host='192.168.1.103', port=3306, db='books', user='root', password="readers")
+            cursor = sqldb.cursor()
+            cursor.execute('SELECT title,genre,isbn,cover FROM book')
+            for row in cursor.fetchall():
+                newBook = Book(title = row[0],genre=row[1],isbn=int(row[2]),cover=row[4])
+                newBook.put()
+            sqldb.close()
+            
+            #newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            #newBook.put()
         
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            newBook.put()
+            #newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            #newBook.put()
  
-            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            newBook.put()
+            #newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            #newBook.put()
 
-            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            newBook.put()
+            #newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            #newBook.put()
             
             query = Book.all()
         
@@ -138,7 +157,22 @@ class Student(db.Model):
         theStudentDict['grade'] = self.grade
         theStudentDict['pagesRead'] = self.pagesRead
         return theStudentDict
+
+class Book2(self,title,genre,isbn,cover):
+    #instance class for seperating from dataStore
+    self.title = title
+    self.genre = genre
+    self.isbn = isbn
+    self.cover = cover
     
+    def dict(self):
+        theBookDict = {}
+        theBookDict['title'] = self.title
+        theBookDict['genre'] = self.genre
+        theBookDict['isbn'] = self.isbn
+        theBookDict['cover'] = self.cover
+        return theBookDict
+        
 class Book(db.Model):
     title = db.StringProperty()
     genre = db.StringProperty()
