@@ -17,14 +17,14 @@ jinja_environment = jinja2.Environment(
 
 class MainPage(webapp2.RequestHandler):        
     def setupUser(self): 
-        self.template_values = {}
-        self.currentUser = users.get_current_user()  
-        self.template_values['user'] = self.currentUser
-        if self.currentUser:
-            self.template_values['login'] = users.create_logout_url("/")
-        else:
-            self.template_values['login'] = users.create_login_url(self.request.uri)
-   
+            self.template_values = {}
+            self.currentUser = users.get_current_user()  
+            self.template_values['user'] = self.currentUser
+            if self.currentUser:
+                self.template_values['login'] = users.create_logout_url("/")
+            else:
+                self.template_values['login'] = users.create_login_url(self.request.uri)
+       
     def setupJSON(self, objID):
         self.json = False
         if (self.request.get('fmt') == 'json'):
@@ -52,7 +52,12 @@ class MainPage(webapp2.RequestHandler):
         return theStudent   
 class LoginHandler(MainPage):
     def get(self):
-        
+        if(self.request.get('logintype')==google):
+             self.setupUser()
+         if(self.request.get('logintype')==ourdata):
+            self.loginUser = self.request.get('user')
+            self.loginPassword = self.request.get('password')
+            db.key.from_path('Student)
     def post(self):
         
 class BookHandler(MainPage):
@@ -67,24 +72,6 @@ class BookHandler(MainPage):
         query = Book.all();
         #DEMO CODE
         if query.count() == 0:
-            #SQL Interface code beta 
-            #currently loads the data into dataStore app engine
-            #standard google test code first statement is live running using google mySqL
-            #if (os.getenv('SERVER_SOFTWARE') and
-                #os.getenv('SERVER_SOFTWARE').startswith('Google App Engine/')):
-                #db = MySQLdb.connect(unix_socket='/cloudsql/' + _INSTANCE_NAME, db='guestbook', user='root')
-            #else:
-            #localHost - host is current where about of mySql instance
-            #note the 192.168.1.103 is a standard pc and is not operational 24/7 and for testing purpose
-            #please contact mitchea2@email.sc.edu to bring it up
-            #local host redirct is 127.0.0.1 for reverting to normal test mode.
-           # sqldb = MySQLdb.connect(host='192.168.1.103', port=3306, db='books', user='root', password="readers")
-            #cursor = sqldb.cursor()
-            #cursor.execute('SELECT title,genre,isbn,cover FROM book')
-            #for row in cursor.fetchall():
-                #newBook = Book(title = row[0],genre=row[1],isbn=int(row[2]),cover=row[4])
-                #newBook.put()
-           # sqldb.close()
             
             newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
             newBook.put()
@@ -133,7 +120,6 @@ class StudentHandler(MainPage):
 
         newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade), pagesRead = 0)
         newStudent.put()
-        newStudent.put()
         
         self.redirect('/student')            
         return
@@ -148,6 +134,9 @@ class Student(db.Model):
     pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
+    
+    password = db.StringProperty()
+    books = db.ListProperty(long)
     
     def id(self):
         return self.key().id()
@@ -175,11 +164,12 @@ class Book(db.Model):
         theBookDict['isbn'] = self.isbn
         theBookDict['cover'] = self.cover
         return theBookDict
-    
-class Bookshelf(db.Model):
-    books = db.ListProperty(long)
-    sort = db.IntegerProperty() # Sort by this variable
-    positions = db.ListProperty(long)
+
+# books should only be a list of ISBN Numbers. the ISBN number are then refrecned through Books datastore and returned
+#
+#class Bookshelf(db.Model):#   books = db.ListProperty(long)
+#  sort = db.IntegerProperty() # Sort by this variable
+# positions = db.ListProperty(long)
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
                                ('/book()', BookHandler), ('/login()',LoginHandler),
