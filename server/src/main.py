@@ -50,7 +50,11 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/')
             return None
         return theStudent   
-    
+class LoginHandler(MainPage):
+    def get(self):
+        
+    def post(self):
+        
 class BookHandler(MainPage):
     def get(self, bookID): 
                 
@@ -178,5 +182,5 @@ class Bookshelf(db.Model):
     positions = db.ListProperty(long)
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
-                               ('/book()', BookHandler),
+                               ('/book()', BookHandler), ('/login()',LoginHandler),
                                ('/.*', MainPage)], debug=True)
