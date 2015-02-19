@@ -7,7 +7,6 @@ import webapp2
 import jinja2
 import os
 import json
-import MySQLdb
 
 from google.appengine.api import users
 from google.appengine.ext import db
