@@ -57,7 +57,11 @@ class LoginHandler(MainPage):
          if(self.request.get('logintype')==ourdata):
             self.loginUser = self.request.get('user')
             self.loginPassword = self.request.get('password')
-            db.key.from_path('Student)
+            db.key.from_path('Student', loginUser )
+            if theStudent == None:
+                self.redirct('/')
+            if theStudent.password != loginPassword:
+                self.redirct('/')
     def post(self):
         
 class BookHandler(MainPage):
