@@ -75,25 +75,25 @@ class BookHandler(MainPage):
             #note the 192.168.1.103 is a standard pc and is not operational 24/7 and for testing purpose
             #please contact mitchea2@email.sc.edu to bring it up
             #local host redirct is 127.0.0.1 for reverting to normal test mode.
-            sqldb = MySQLdb.connect(host='192.168.1.103', port=3306, db='books', user='root', password="readers")
-            cursor = sqldb.cursor()
-            cursor.execute('SELECT title,genre,isbn,cover FROM book')
-            for row in cursor.fetchall():
-                newBook = Book(title = row[0],genre=row[1],isbn=int(row[2]),cover=row[4])
-                newBook.put()
-            sqldb.close()
+           # sqldb = MySQLdb.connect(host='192.168.1.103', port=3306, db='books', user='root', password="readers")
+            #cursor = sqldb.cursor()
+            #cursor.execute('SELECT title,genre,isbn,cover FROM book')
+            #for row in cursor.fetchall():
+                #newBook = Book(title = row[0],genre=row[1],isbn=int(row[2]),cover=row[4])
+                #newBook.put()
+           # sqldb.close()
             
-            #newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            #newBook.put()
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
         
-            #newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            #newBook.put()
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
  
-            #newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            #newBook.put()
+            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
 
-            #newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
-            #newBook.put()
+            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook.put()
             
             query = Book.all()
         
@@ -159,21 +159,6 @@ class Student(db.Model):
         theStudentDict['pagesRead'] = self.pagesRead
         return theStudentDict
 
-class Book2(self,title,genre,isbn,cover):
-    #instance class for seperating from dataStore
-    self.title = title
-    self.genre = genre
-    self.isbn = isbn
-    self.cover = cover
-    
-    def dict(self):
-        theBookDict = {}
-        theBookDict['title'] = self.title
-        theBookDict['genre'] = self.genre
-        theBookDict['isbn'] = self.isbn
-        theBookDict['cover'] = self.cover
-        return theBookDict
-        
 class Book(db.Model):
     title = db.StringProperty()
     genre = db.StringProperty()
