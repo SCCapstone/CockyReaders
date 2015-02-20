@@ -54,7 +54,7 @@ class LoginHandler(MainPage):
     def get(self):
         if(self.request.get('logintype')==google):
              self.setupUser()
-         if(self.request.get('logintype')==ourdata):
+        if(self.request.get('logintype')==ourdata):
             self.loginUser = self.request.get('user')
             self.loginPassword = self.request.get('password')
             db.key.from_path('Student', loginUser )
