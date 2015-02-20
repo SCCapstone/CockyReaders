@@ -50,14 +50,22 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/')
             return None
         return theStudent   
+#class for login side of the app        
 class LoginHandler(MainPage):
     def get(self):
-        if(self.request.get('logintype')==google):
-             self.setupUser()
-        if(self.request.get('logintype')==ourdata):
+        if(self.request.get('logintype') == google):
+            self.setupUser()
+        if(self.request.get('logintype') == ourdata):
             self.loginUser = self.request.get('user')
             self.loginPassword = self.request.get('password')
-            key =db.key.from_path('Student', loginUser )
+            
+            #demo user
+            query = Student.all()
+            if(query == 0):
+                newStudent = Student(firstname="temp",lastname="temp",username="theFirst",password="password, books= [1113,1113])
+                newStudent.put()
+                
+            key = db.key.from_path('Student', loginUser )
             theStudent = db.get(key)
             if theStudent == None:
                 self.redirct('/')
@@ -66,17 +74,19 @@ class LoginHandler(MainPage):
             #code for return a successful login 
             #
     def post(self):
-        
+        #for setting up users
 class BookHandler(MainPage):
     def get(self, bookID): 
                 
         self.setupUser()
         
         self.setupJSON(bookID)
+        
         self.loginUser = self.request.get('user')
         key = db.key.from_path('Student', loginUser)
         theStudent = db.get(key)
         libaryList = theStudent.books
+        
         query = Book.all();
         #DEMO CODE
         if query.count() == 0:
