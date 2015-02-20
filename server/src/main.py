@@ -57,7 +57,8 @@ class LoginHandler(MainPage):
         if(self.request.get('logintype')==ourdata):
             self.loginUser = self.request.get('user')
             self.loginPassword = self.request.get('password')
-            db.key.from_path('Student', loginUser )
+            key =db.key.from_path('Student', loginUser )
+            theStudent = db.get(key)
             if theStudent == None:
                 self.redirct('/')
             if theStudent.password != loginPassword:
