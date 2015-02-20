@@ -63,6 +63,8 @@ class LoginHandler(MainPage):
                 self.redirct('/')
             if theStudent.password != loginPassword:
                 self.redirct('/')
+            #code for return a successful login 
+            #
     def post(self):
         
 class BookHandler(MainPage):
@@ -71,9 +73,10 @@ class BookHandler(MainPage):
         self.setupUser()
         
         self.setupJSON(bookID)
-        
-     
-
+        self.loginUser = self.request.get('user')
+        key = db.key.from_path('Student', loginUser)
+        theStudent = db.get(key)
+        libaryList = theStudent.books
         query = Book.all();
         #DEMO CODE
         if query.count() == 0:
@@ -96,8 +99,12 @@ class BookHandler(MainPage):
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.headers['Content-Type'] = "text/json"
             books = []
-            for book in query:
-                books.append(book.dict())
+            #look through the books based on the isbn number
+            for isbnN in libaryList:
+                key = db.key.from_path('Books', isbnN)
+                book = db.get(key)
+                if(isbnN == book.isbn):
+                    books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
         
