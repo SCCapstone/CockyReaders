@@ -59,10 +59,10 @@ class LoginHandler(MainPage):
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstname="temp", lastname="temp", username="theFirst", password="password", books= [1113,1113])
+            newStudent = Student(firstname="temp", lastname="temp", userName="theFirst", password="password", books= [1113,1113])
             newStudent.put()
                 
-        key = db.key.from_path('Student', loginUser )
+        key = db.Key.from_path('Student', loginUser )
         theStudent = db.get(key)
         if theStudent == None:
             self.redirct('/')
@@ -71,35 +71,35 @@ class LoginHandler(MainPage):
         #code for return a successful login 
         #
     def post(self):
+		newUser = student(firstname="temp",lastname="temp", userName="theSecond", password="password",books=[])
+		newUser.put()
         #for setting up users
 class BookHandler(MainPage):
-    def get(self, bookID): 
-                
+    def get(self, bookID):   
         self.setupUser()
         self.setupJSON(bookID)
-        
         loginUser = self.request.get('user')
-		if query.count() == 0:
-            newStudent = Student(firstname="temp", lastname="temp", username="theFirst", password="password", books= [1113,1113])
-			newStudent.put()
-        key = db.key.from_path('Student', loginUser)
+        query = Student.all()
+        if (query.count() == 0):
+            newStudent = Student(firstname="temp", lastname="temp", userName="theFirst", password="password", books= [1113,1113])
+            newStudent.put()
+        key = db.Key.from_path('Student', str(loginUser))
         theStudent = db.get(key)
         libaryList = theStudent.books
         
-        query = Book.all();
+        query = Book.all()
         #DEMO CODE
         if query.count() == 0:
-            
             newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
             newBook.put()
         
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_1.jpg")
             newBook.put()
  
-            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1115), cover = "img/book_1.jpg")
             newBook.put()
 
-            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1116), cover = "img/book_1.jpg")
             newBook.put()
             
             query = Book.all()
@@ -110,7 +110,7 @@ class BookHandler(MainPage):
             books = []
             #look through the books based on the isbn number
             for isbnN in libaryList:
-                key = db.key.from_path('Books', isbnN)
+                key = db.key.from_path('Books', long(isbnN))
                 book = db.get(key)
                 if(isbnN == book.isbn):
                     books.append(book.dict())
@@ -148,10 +148,9 @@ class StudentHandler(MainPage):
 class Student(db.Model):
     firstName = db.StringProperty()
     lastName = db.StringProperty()
-    userName = db.StringProperty()
     teacher = db.StringProperty()
     grade = db.IntegerProperty()
-    bookshelf = db.Key()
+    userName = db.Key()
     pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
