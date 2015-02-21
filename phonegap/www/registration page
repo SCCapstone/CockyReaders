@@ -1,0 +1,61 @@
+<!-- Registration Page -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Registration Page</title>
+  </head>
+  
+  <body>
+  	<h1 style="font-family:Comic Sans MS; color:black; text-align:center">
+  	Cocky's Reading Express</h1>
+  
+  <!-- Change the action to take us to the login page so they can relogin -->
+  <form style="font-family:Comic Sans MS" align="middle" action="login_action_page.php" method="POST">
+  	
+  	<!-- Need to narrow down what we need for the registration -->
+  	
+  	<!-- What is your Name? -->
+  
+  	<input type="text" name="username" size="40" style="font-family:Comic Sans MS"
+  	value="What is your Name?">
+  	<br>
+  
+  	<!-- Who is your teacher? -->
+
+	<input type="text" name="teacher" size="40" style="font-family:Comic Sans MS"
+  	value="Who is your Teacher?">
+  	<br>
+  
+	<!-- What is your Library Card Number? -->
+
+	<input type="text" name="libraryCardNumber" size="40" style="font-family:Comic Sans MS"
+  	value="What is your Library Card Number?">
+  	<br>
+
+	<!-- What is your Lunch Pin? -->
+
+  	<input type="text" name="lunchPin" size="40" style="font-family:Comic Sans MS"
+  	value="What is your Lunch Pin?">
+	<br>
+	
+	<!-- What grade are you in? -->
+	
+	What grade are you in?
+	<input type="number" name ="grade" min="1" max="5" style="font-family:Comic Sans MS">
+	
+
+  	<br><br>
+  
+  	<input type="submit" value="I'm Done!">
+  
+  
+  </form>
+  
+  <!-- Need to add Cocky pic and USC logo to www/img folder and then pull from there -->
+  <img src="http://www.lawctopus.com/wp-content/uploads/2013/10/cocky.jpg" alt="Cocky"
+  style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
+  
+  
+  </body>
+</html>
