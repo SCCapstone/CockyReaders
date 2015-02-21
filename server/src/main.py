@@ -61,7 +61,7 @@ class LoginHandler(MainPage):
             
             #demo user
             query = Student.all()
-            if(query == 0):
+            if query.count() == 0:
                 newStudent = Student(firstname="temp",lastname="temp",username="theFirst",password="password, books= [1113,1113])
                 newStudent.put()
                 
