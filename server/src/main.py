@@ -53,13 +53,13 @@ class MainPage(webapp2.RequestHandler):
 #class for login side of the app        
 class LoginHandler(MainPage):
     def get(self):
-        self.loginUser = self.request.get('user')
-        self.loginPassword = self.request.get('password')
+        loginUser = self.request.get('user')
+        loginPassword = self.request.get('password')
             
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstname="temp",lastname="temp",username="theFirst",password="password, books= [1113,1113])
+            newStudent = Student(firstname="temp", lastname="temp", username="theFirst", password="password", books= [1113,1113])
             newStudent.put()
                 
         key = db.key.from_path('Student', loginUser )
@@ -76,10 +76,12 @@ class BookHandler(MainPage):
     def get(self, bookID): 
                 
         self.setupUser()
-        
         self.setupJSON(bookID)
         
-        self.loginUser = self.request.get('user')
+        loginUser = self.request.get('user')
+		if query.count() == 0:
+            newStudent = Student(firstname="temp", lastname="temp", username="theFirst", password="password", books= [1113,1113])
+			newStudent.put()
         key = db.key.from_path('Student', loginUser)
         theStudent = db.get(key)
         libaryList = theStudent.books
