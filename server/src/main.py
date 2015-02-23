@@ -61,18 +61,36 @@ class LoginHandler(MainPage):
         if query.count() == 0:
             newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1113])
             newStudent.put()
-                
-        key = db.Key.from_path('Student', loginUser )
-        theStudent = db.get(key)
+        #this does now work properly unless the key_name of each entry is that of the UserName
+        #currently the key_name is the student id		
+        #key = db.Key.from_path('Student', loginUser )
+        #theStudent = db.get(key)
+		q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE passwoerd = :2",loginUser,loginPassword)
+        for student in q.run(limit=1):
+            theStudent = student
         if theStudent == None:
-            self.redirct('/')
+		    #return unsuccessful login
+            self.redirct('/') #temp
         if theStudent.password != loginPassword:
-            self.redirct('/')
+		   #return unsuccessful login
+            self.redirct('/') #temp
         #code for return a successful login 
         #
     def post(self):
-		newUser = student(firstname="temp",lastname="temp", userName="theSecond", password="password",books=[])
-		newUser.put()
+        newUserName = self.request.get('user')
+        newUserPassword = self.request.get('password')
+        newUserFirstName = self.request.get('firstName')
+        newUserlastName = self.request.get('lastName')
+        newUserTeacher = self.request.get('teacher')
+        newUserGrade = self.request.get('grade')
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE passwoerd = :2",newUserName,newUserPassword)
+        if q.count() = 0:
+            #return error that this invalid
+            logging.debug("invalid user being added")
+        newUser = student(firstname = newUserFirstName,lastname = newUserLastName, userName = newUserName, password = newUserPassword
+                          teacher=newUserteacher,grade = int(newUserGrade),books=[1113])
+        #compare USerName and return if invalid  
+        newUser.put()
         #for setting up users
 class BookHandler(MainPage):
     def get(self, bookID):   
@@ -143,7 +161,7 @@ class StudentHandler(MainPage):
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
 
-        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade), pagesRead = 0)
+        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade),books=[1113,1114] pagesRead = 0)
         newStudent.put()
         
         self.redirect('/student')            
@@ -190,8 +208,6 @@ class Book(db.Model):
         theBookDict['cover'] = self.cover
         return theBookDict
 
-# books should only be a list of ISBN Numbers. the ISBN number are then refrecned through Books datastore and returned
-#
 #class Bookshelf(db.Model):#   books = db.ListProperty(long)
 #  sort = db.IntegerProperty() # Sort by this variable
 # positions = db.ListProperty(long)
