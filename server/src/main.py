@@ -59,7 +59,7 @@ class LoginHandler(MainPage):
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstname="temp", lastname="temp", userName="theFirst", password="password", books= [1113,1113])
+            newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1113])
             newStudent.put()
                 
         key = db.Key.from_path('Student', loginUser )
@@ -79,14 +79,19 @@ class BookHandler(MainPage):
         self.setupUser()
         self.setupJSON(bookID)
         loginUser = self.request.get('user')
+        logging.debug("value of my var is %s", str(loginUser))
         query = Student.all()
         if (query.count() == 0):
-            newStudent = Student(firstname="temp", lastname="temp", userName="theFirst", password="password", books= [1113,1113])
+            newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1114])
             newStudent.put()
-        key = db.Key.from_path('Student', str(loginUser))
-        theStudent = db.get(key)
-        libaryList = theStudent.books
-        
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1",loginUser)
+        theStudent = Student()
+        for p in q.run(limit=1):
+            theStudent = p
+        if theStudent == None:
+		    libaryList = [1113,1114,1115]
+        else:	
+            libaryList = theStudent.books
         query = Book.all()
         #DEMO CODE
         if query.count() == 0:
@@ -110,10 +115,9 @@ class BookHandler(MainPage):
             books = []
             #look through the books based on the isbn number
             for isbnN in libaryList:
-                key = db.key.from_path('Books', long(isbnN))
-                book = db.get(key)
-                if(isbnN == book.isbn):
-                    books.append(book.dict())
+                q = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(isbnN))
+                for book in q.run(limit=1):
+				   books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
         
@@ -150,7 +154,7 @@ class Student(db.Model):
     lastName = db.StringProperty()
     teacher = db.StringProperty()
     grade = db.IntegerProperty()
-    userName = db.Key()
+    userName = db.StringProperty()
     pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
@@ -169,6 +173,7 @@ class Student(db.Model):
         theStudentDict['teacher'] = self.teacher
         theStudentDict['grade'] = self.grade
         theStudentDict['pagesRead'] = self.pagesRead
+        theStudentDict['isbnList'] = self.books
         return theStudentDict
 
 class Book(db.Model):

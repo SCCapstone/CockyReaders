@@ -89,10 +89,11 @@ function updateBookcase() {
 
 function GET_Books() {
     outAJAX++;
-    $.ajax('http://localhost:9080/book', {
+    $.ajax('http://localhost:8080/book', {
         type: 'GET',
         data: {
-            fmt: 'json'
+            fmt: 'json',
+			user: 'theFirst',
         },
         success: function(data){			
             bookList = data;
@@ -107,11 +108,11 @@ function GET_Books() {
 
 function POST_Student() {
     outAJAX++;
-    $.ajax('http://localhost:9080/student', {
+    $.ajax('http://localhost:8080/student', {
         type: 'POST',
         data: {
-            fmt: 'json';
-            pageCount: null;
+            fmt: 'json',
+            pageCount: null,
         },
         success: function(data){			
             console.log('Updates sent to server.');
