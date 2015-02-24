@@ -83,7 +83,7 @@ class LoginHandler(MainPage):
         newUserlastName = self.request.get('lastName')
         newUserTeacher = self.request.get('teacher')
         newUserGrade = self.request.get('grade')
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE passwoerd = :2",newUserName,newUserPassword)
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE password = :2",newUserName,newUserPassword)
         if q.count() = 0:
             #return error that this invalid
             logging.debug("invalid user being added")
