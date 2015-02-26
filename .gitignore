@@ -2,6 +2,8 @@
 server/.project
 server/.pydevproject
 
+.swp
+
 # ANDROID / ECLIPSE
  
 # built application files
