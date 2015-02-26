@@ -17,13 +17,28 @@
         <script src="js/libs/zip.min.js"></script>        
 
         <script>
+            
             "use strict";
+            // Function to get the username from a cookie
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
 
             document.onreadystatechange = function () {  
                 if (document.readyState == "complete") {
                     EPUBJS.filePath = "js/libs/";
                     EPUBJS.cssPath = "css/";
-                    var reader = ePubReader("library/sleeping_beauty/");
+                    
+                    var bookURL = getCookie("bookURL");
+                    var reader = ePubReader(bookURL);
+                    var user = getCookie("user");
                 }  
             };
 
@@ -70,6 +85,7 @@
         <div id="main">
             <div id="titlebar">
                 <div id="opener">
+                    <!-- Redirect back to bookshelf page; NEED USERNAME -->
                     <a id="slider" class="icon-menu" href="index.html">Menu</a>
                 </div>
                 <div id="metainfo">

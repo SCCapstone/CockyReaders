@@ -57,8 +57,6 @@ class BookHandler(MainPage):
         self.setupUser()
         
         self.setupJSON(bookID)
-        
-     
 
         query = Book.all();
         #DEMO CODE

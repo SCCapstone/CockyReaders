@@ -4,18 +4,19 @@
 <html>
   <head>
   	<title>Login Page</title>
-  </head>
+      <script type="application/javascript" src="js/login.js"></script>
+  </head> 
   
   <body>
   	<h1 style="font-family:Comic Sans MS; color:#73000A; text-align:center">
   	Cocky's Reading Express</h1>
   
   <!-- Change the action to take us to the bookshelf -->
-  <form style="font-family:Comic Sans MS" align="middle" action="action_page.php" method="POST">
+  <form style="font-family:Comic Sans MS" align="middle" onsubmit="GET_Login(this);" method="POST">
   	
   	<!-- Username: <br> -->
   
-  	<input type="text" name="Username" style="font-family:Comic Sans MS"
+  	<input type="text" name="username" style="font-family:Comic Sans MS"
   	value="Username">
   	<br>
   

@@ -37,8 +37,11 @@ function updateBookcase() {
         div2.style.border = "0px none rgb(0, 147, 204)";
 
         var image = document.createElement("img");
+        // SET BOOK URL VIA COOKIE HERE
         image.onclick = function callAnotherPage() {
+            setCookie("bookURL", theBook.bookUrl, 1);
             window.location = "reader.html";
+            
         };
         image.src = theBook.cover;
         image.rel = "book_thumb_8";
@@ -87,11 +90,33 @@ function updateBookcase() {
     }
 }
 
+// Function to get the username from a cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+// Function to set a cookie with name 'cname', value 'cvalue', and expiration time 'exdays'
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/;";
+}
+
+// HARD CODED FOR NOW
 function GET_Books() {
     outAJAX++;
     $.ajax('http://localhost:9080/book', {
         type: 'GET',
         data: {
+            user: getCookie("user"),
             fmt: 'json'
         },
         success: function(data){			
@@ -105,11 +130,19 @@ function GET_Books() {
     });
 }
 
+
+// Register student
 function POST_Student() {
     outAJAX++;
     $.ajax('http://localhost:9080/student', {
         type: 'POST',
         data: {
+            user:,
+            password:,
+            grade:,
+            teacher:,
+            libNum:,
+            
             fmt: 'json';
             pageCount: null;
         },
