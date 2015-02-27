@@ -14,7 +14,7 @@ from google.appengine.api.validation import Repeated
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
-
+Host = "HTTP://localhost:8080/"
 class MainPage(webapp2.RequestHandler):        
     def setupUser(self): 
             self.template_values = {}
@@ -117,13 +117,13 @@ class BookHandler(MainPage):
         query = Book.all()
         #DEMO CODE
         if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "HTTP://www.",link="HTTP://www.")
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = Host+"/libary/1113",link = Host+"/libary/1115")
             newBook.put()
         
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "HTTP://www.",link="HTTP://www.")
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = Host+"/libary/1114",link = Host+"/libary/1114")
             newBook.put()
  
-            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover = "HTTP://www.",link="HTTP://www.")
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover = Host+"/libary/1115" , link = Host+"/libary/1115")
             newBook.put()
             
             query = Book.all()
@@ -204,7 +204,7 @@ class Book(db.Model):
     genre = db.StringProperty()
     isbn = db.IntegerProperty()
     cover = db.StringProperty()
-	libaryLink = db.StringProperty()
+    libaryLink = db.StringProperty()
 
     def dict(self):
         theBookDict = {}
