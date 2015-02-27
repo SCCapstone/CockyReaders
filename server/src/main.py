@@ -59,23 +59,20 @@ class LoginHandler(MainPage):
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1113])
+            newStudent = Student(key_name= 1,firstName="temp", lastName="temp", userName="theFirst", password="password", books=[1113,1114])
             newStudent.put()
         #this does now work properly unless the key_name of each entry is that of the UserName
         #currently the key_name is the student id		
         #key = db.Key.from_path('Student', loginUser )
         #theStudent = db.get(key)
-		q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE passwoerd = :2",loginUser,loginPassword)
-        for student in q.run(limit=1):
-            theStudent = student
-        if theStudent == None:
-		    #return unsuccessful login
-            self.redirct('/') #temp
-        if theStudent.password != loginPassword:
-		   #return unsuccessful login
-            self.redirct('/') #temp
-        #code for return a successful login 
-        #
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE password = :2",loginUser,loginPassword)
+		
+        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+        self.response.out.headers['Content-Type'] = "text/json"
+		if q.count() == 0:
+           self.response.out.write("Failure")
+        else:
+            self.response.out.write("Success")
     def post(self):
         newUserName = self.request.get('user')
         newUserPassword = self.request.get('password')
@@ -83,15 +80,22 @@ class LoginHandler(MainPage):
         newUserlastName = self.request.get('lastName')
         newUserTeacher = self.request.get('teacher')
         newUserGrade = self.request.get('grade')
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE password = :2",newUserName,newUserPassword)
-        if q.count() = 0:
+        newUserPin = self.request.get('pinNumber')
+        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+        self.response.out.headers['Content-Type'] = "text/json"
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1",newUserName)
+        if q.count() >= 1:
             #return error that this invalid
+            self.response.out.write("Failure")
             logging.debug("invalid user being added")
-        newUser = student(firstname = newUserFirstName,lastname = newUserLastName, userName = newUserName, password = newUserPassword
-                          teacher=newUserteacher,grade = int(newUserGrade),books=[1113])
-        #compare USerName and return if invalid  
-        newUser.put()
-        #for setting up users
+        else:
+            #if error here, remove the int cast and just let the userpin be a string
+            newUser = student(key_name=int(newUserPin),firstName = newUserFirstName,lastname = newUserLastName, userName = newUserName, password = newUserPassword
+                          teacher=newUserteacher,grade = int(newUserGrade),books=[1113,1114])
+            #compare USerName and return if invalid  
+            newUser.put()
+            #for setting up users
+            self.response.out.write("Success")
 class BookHandler(MainPage):
     def get(self, bookID):   
         self.setupUser()
@@ -113,16 +117,13 @@ class BookHandler(MainPage):
         query = Book.all()
         #DEMO CODE
         if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "HTTP://www.",link="HTTP://www.")
             newBook.put()
         
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_1.jpg")
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "HTTP://www.",link="HTTP://www.")
             newBook.put()
  
-            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1115), cover = "img/book_1.jpg")
-            newBook.put()
-
-            newBook = Book(title = "Piece of Crap", genre = "Fantasy", isbn = int(1116), cover = "img/book_1.jpg")
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover = "HTTP://www.",link="HTTP://www.")
             newBook.put()
             
             query = Book.all()
@@ -139,8 +140,12 @@ class BookHandler(MainPage):
             self.response.out.write(json.dumps(books))
             return       
         
-        
-        
+class UserMangament(MainPage):
+    def get(self):
+    def post(self):	
+class LibaryHandler(MainPage):
+    def get(self):
+    def post(self):	
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -199,6 +204,7 @@ class Book(db.Model):
     genre = db.StringProperty()
     isbn = db.IntegerProperty()
     cover = db.StringProperty()
+	libaryLink = db.StringProperty()
 
     def dict(self):
         theBookDict = {}
@@ -206,6 +212,7 @@ class Book(db.Model):
         theBookDict['genre'] = self.genre
         theBookDict['isbn'] = self.isbn
         theBookDict['cover'] = self.cover
+		theBookDict['link'] =self.libaryLink
         return theBookDict
 
 #class Bookshelf(db.Model):#   books = db.ListProperty(long)
