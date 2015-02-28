@@ -113,11 +113,14 @@ function setCookie(cname, cvalue, exdays) {
 // HARD CODED FOR NOW
 function GET_Books() {
     outAJAX++;
+    $.ajax('http://localhost:8080/book', {
     $.ajax('http://localhost:9080/book', {
         type: 'GET',
         data: {
             user: getCookie("user"),
             fmt: 'json'
+            fmt: 'json',
+			user: 'theFirst',
         },
         success: function(data){			
             bookList = data;
@@ -134,6 +137,7 @@ function GET_Books() {
 // Register student
 function POST_Student() {
     outAJAX++;
+    $.ajax('http://localhost:8080/student', {
     $.ajax('http://localhost:9080/student', {
         type: 'POST',
         data: {
@@ -145,6 +149,8 @@ function POST_Student() {
             
             fmt: 'json';
             pageCount: null;
+            fmt: 'json',
+            pageCount: null,
         },
         success: function(data){			
             console.log('Updates sent to server.');
