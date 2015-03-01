@@ -7,71 +7,56 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
 	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<meta name="format-detection" content="telephone=no" />
+        <script src="js/jquery.js"></script>
+        <script src="js/login.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                console.log("ready");
+                });       
+        </script>
   </head>
   
   <body>
   	<h1 style="font-family:Comic Sans MS; color:black; text-align:center">
   	Cocky's Reading Express</h1>
   
-  <!-- Change the action to take us to the login page so they can relogin -->
-  <form style="font-family:Comic Sans MS" align="middle" action="login_action_page.php" method="POST">
-  	
-  	<!-- What is your first Name? -->
-  
+  <form id="registerForm" style="font-family:Comic Sans MS" align="middle">
+  	  
   	<input type="text" name="firstName" size="40" style="font-family:Comic Sans MS"
   	value="What is your first name?">
   	<br>
-  
-	<!-- What is your first Name? -->
-  
+    
   	<input type="text" name="lastName" size="40" style="font-family:Comic Sans MS"
   	value="What is your last name?">
   	<br>
 
-  	<!-- Create a username! -->
-
-	<input type="text" name="userName" size="40" style="font-family:Comic Sans MS"
+	<input type="text" name="user" size="40" style="font-family:Comic Sans MS"
   	value="Create a username!">
   	<br>
-
-
-  	<!-- Create a password! -->
 
 	<input type="text" name="password" size="40" style="font-family:Comic Sans MS"
   	value="Create a password!">
   	<br>
 
-  	<!-- Who is your teacher? -->
-
 	<input type="text" name="teacher" size="40" style="font-family:Comic Sans MS"
   	value="Who is your Teacher?">
   	<br>
-  
 
-	<!-- What is your Lunch Pin? -->
-
-  	<input type="text" name="lunchPin" size="40" style="font-family:Comic Sans MS"
+  	<input type="text" name="pinNumber" size="40" style="font-family:Comic Sans MS"
   	value="What is your Lunch Pin?">
 	<br>
+		
+	<input type="number" name="grade" min="0" max="5" style="font-family:Comic Sans MS"
+    value="What grade are you in?">
 	
-	<!-- What grade are you in? -->
-	
-	What grade are you in?
-	<input type="number" name ="grade" min="0" max="5" style="font-family:Comic Sans MS">
-	
-
   	<br><br>
-	<a href="COckyReaders/phonegap/www/loginPage.html">
-  		<input type="submit" value="I'm Done!">
-	</a>
+    <input type="button" value="I'm Done!" onclick="POST_Login();">
 
-  
   </form>
   
-  <!-- Need to add Cocky pic and USC logo to www/img folder and then pull from there -->
-  <img src="http://www.lawctopus.com/wp-content/uploads/2013/10/cocky.jpg" alt="Cocky"
-  style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
+  <img src="img/cocky.jpg" alt="Cocky" style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
   
+  <img src="img/usc_logo.png" alt="USC Logo" style="position: absolute; top: 250px; right:50px;;width:100px;height:100px">
   
   </body>
 </html>

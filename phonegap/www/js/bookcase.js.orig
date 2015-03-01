@@ -10,13 +10,9 @@ function updateBookcase() {
     var theBook;
     var i = 0;
 
-    console.log(bookList)
-    
     while (i < bookList.length) {
 
         theBook = bookList[i];
-        console.log(theBook);
-        console.log(theBook.link);
 
         var span = document.createElement("span");
         span.style.float = "left"
@@ -41,10 +37,12 @@ function updateBookcase() {
         div2.style.border = "0px none rgb(0, 147, 204)";
 
         var image = document.createElement("img");
-        // SET BOOK URL VIA COOKIE HERE\        
-        image.id = i;
-        image.onclick = function() {test(this.id);};
-
+        // SET BOOK URL VIA COOKIE HERE
+        image.onclick = function callAnotherPage() {
+            setCookie("bookURL", theBook.bookUrl, 1);
+            window.location = "reader.html";
+            
+        };
         image.src = theBook.cover;
         image.rel = "book_thumb_8";
         image.className = " captify book_thumb";
@@ -77,7 +75,7 @@ function updateBookcase() {
         div4.style.width = "100%"
         div4.style.backgroundPosition = "initial initial"
         div4.style.backgroundRepeat = "initial initial"
-        
+
         div2.appendChild(image);
         div2.appendChild(div3);
 
@@ -90,14 +88,6 @@ function updateBookcase() {
         i++;	
         bookshelfDiv.appendChild(span);
     }
-}
-
-function test(index) {
-            console.log("Clear book URL");
-            setCookie("bookURL", "", 1);
-            console.log("Reset Book URL");
-            setCookie("bookURL", bookList[index].link, 1);
-            window.location = "reader.html";  
 }
 
 // Function to get the username from a cookie
@@ -123,16 +113,51 @@ function setCookie(cname, cvalue, exdays) {
 // HARD CODED FOR NOW
 function GET_Books() {
     outAJAX++;
-    $.ajax('http://localhost:9080/book', {
+    $.ajax('http://localhost:8080/book', {
         type: 'GET',
         data: {
+<<<<<<< HEAD
             user: getCookie("user"),
+            fmt: 'json'
+=======
             fmt: 'json',
+			user: 'theFirst',
+>>>>>>> andrew
         },
         success: function(data){			
             bookList = data;
-            updateView();
-            console.log('Books loaded.');
+            console.log('Books loaded:');
+        },
+        error: function() {
+            console.log('Error at server:');
+        },
+        complete: checkAJAX
+    });
+}
+
+
+// Register student
+function POST_Student() {
+    outAJAX++;
+    $.ajax('http://localhost:8080/student', {
+        type: 'POST',
+        data: {
+<<<<<<< HEAD
+            user:,
+            password:,
+            grade:,
+            teacher:,
+            libNum:,
+            
+            fmt: 'json';
+            pageCount: null;
+=======
+            fmt: 'json',
+            pageCount: null,
+>>>>>>> andrew
+        },
+        success: function(data){			
+            console.log('Updates sent to server.');
         },
         error: function() {
             console.log('Error at server:');
@@ -144,6 +169,7 @@ function GET_Books() {
 function checkAJAX() {
     //console.log("Ajax request complete.")
     outAJAX = outAJAX - 1;
+    if (outAJAX == 0) updateView();
 }
 
 function contains(pinID, array) {

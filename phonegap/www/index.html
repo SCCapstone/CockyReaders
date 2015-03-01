@@ -1,0 +1,50 @@
+<!-- Login Page -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
+	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta name="format-detection" content="telephone=no" />
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
+    
+</head>
+
+<body>
+	<h1 style="font-family:Comic Sans MS; color:#73000A; text-align:center">
+	Cocky's Reading Express</h1>
+
+<!-- Change the action to take us to the bookshelf -->
+<form id="loginForm" style="font-family:Comic Sans MS" align="middle">
+	
+	<!-- Username: <br> -->
+
+	<input type="text" name="user" style="font-family:Comic Sans MS"
+	value="Username">
+	<br>
+
+	<!-- User Password: <br> -->
+
+	<input type="password" name="password" style="font-family:Comic Sans MS"
+	value="Password">
+	<br><br>
+
+	<input type="button" value="Login" onclick="GET_Login()">
+	
+</form>
+       
+    <div align="center">
+        <button id="registerButton" onclick='location.href = "register.html"'>Register</button>
+    </div>
+
+
+
+<!-- Need to add Cocky pic and USC logo to www/img folder and then pull from there -->
+  <img src="img/cocky.jpg" alt="Cocky" style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
+  
+  <img src="img/usc_logo.png" alt="USC Logo" style="position: absolute; top: 250px; right:50px;;width:100px;height:100px">
+    
+</body>
+</html>
