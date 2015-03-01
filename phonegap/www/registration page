@@ -4,6 +4,9 @@
 <html>
   <head>
   	<title>Registration Page</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
+	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta name="format-detection" content="telephone=no" />
   </head>
   
   <body>
@@ -13,25 +16,37 @@
   <!-- Change the action to take us to the login page so they can relogin -->
   <form style="font-family:Comic Sans MS" align="middle" action="login_action_page.php" method="POST">
   	
-  	<!-- Need to narrow down what we need for the registration -->
-  	
-  	<!-- What is your Name? -->
+  	<!-- What is your first Name? -->
   
-  	<input type="text" name="username" size="40" style="font-family:Comic Sans MS"
-  	value="What is your Name?">
+  	<input type="text" name="firstName" size="40" style="font-family:Comic Sans MS"
+  	value="What is your first name?">
   	<br>
   
+	<!-- What is your first Name? -->
+  
+  	<input type="text" name="lastName" size="40" style="font-family:Comic Sans MS"
+  	value="What is your last name?">
+  	<br>
+
+  	<!-- Create a username! -->
+
+	<input type="text" name="userName" size="40" style="font-family:Comic Sans MS"
+  	value="Create a username!">
+  	<br>
+
+
+  	<!-- Create a password! -->
+
+	<input type="text" name="password" size="40" style="font-family:Comic Sans MS"
+  	value="Create a password!">
+  	<br>
+
   	<!-- Who is your teacher? -->
 
 	<input type="text" name="teacher" size="40" style="font-family:Comic Sans MS"
   	value="Who is your Teacher?">
   	<br>
   
-	<!-- What is your Library Card Number? -->
-
-	<input type="text" name="libraryCardNumber" size="40" style="font-family:Comic Sans MS"
-  	value="What is your Library Card Number?">
-  	<br>
 
 	<!-- What is your Lunch Pin? -->
 
@@ -42,13 +57,14 @@
 	<!-- What grade are you in? -->
 	
 	What grade are you in?
-	<input type="number" name ="grade" min="1" max="5" style="font-family:Comic Sans MS">
+	<input type="number" name ="grade" min="0" max="5" style="font-family:Comic Sans MS">
 	
 
   	<br><br>
-  
-  	<input type="submit" value="I'm Done!">
-  
+	<a href="COckyReaders/phonegap/www/loginPage.html">
+  		<input type="submit" value="I'm Done!">
+	</a>
+
   
   </form>
   
