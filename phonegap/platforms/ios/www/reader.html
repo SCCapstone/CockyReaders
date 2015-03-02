@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Ebook Reader</title>
         <meta name="description" content="">
-        <meta name="viewport" content="user-scalable=no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi">
         <meta name="apple-mobile-web-app-capable" content="yes">
 
         <link rel="stylesheet" href="css/normalize.css">
@@ -17,92 +17,103 @@
         <script src="js/libs/zip.min.js"></script>        
 
         <script>
-            "use strict";
             
-            document.onreadystatechange = function () {  
-              if (document.readyState == "complete") {
-                EPUBJS.filePath = "js/libs/";
-                EPUBJS.cssPath = "css/";
-                // fileStorage.filePath = EPUBJS.filePath;
+            "use strict";
+            // Function to get the username from a cookie
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
 
-                var reader = ePubReader("library/sleeping_beauty/");
-              }  
+            document.onreadystatechange = function () {  
+                if (document.readyState == "complete") {
+                    EPUBJS.filePath = "js/libs/";
+                    EPUBJS.cssPath = "css/";
+                    
+                    var bookURL = getCookie("bookURL");
+                    var reader = ePubReader(bookURL);
+                    var user = getCookie("user");
+                }  
             };
-        
+
         </script>
-                
+
         <!-- Render -->
         <script src="js/epub.min.js"></script>
-        
+
         <!-- Hooks -->
         <script src="js/hooks.min.js"></script> 
-        
+
         <!-- Reader -->
         <script src="js/reader.min.js"></script>
-        
+
         <!-- Plugins -->
         <script src="js/plugins/search.js"></script>
-        
+
         <!-- Highlights -->
         <script src="js/libs/jquery.highlight.js"></script>
         <script src="js/hooks/extensions/highlight.js"></script>
-        
+
         <!-- File Storage -->
         <!-- <script src="js/libs/fileStorage.min.js"></script> -->
 
         <!-- Full Screen -->
         <script src="js/libs/screenfull.min.js"></script>
-        
+
     </head>
     <body>
-      <div id="sidebar">
-        <div id="panels">
-          <input id="searchBox" placeholder="search" type="search">
-          <a id="show-Search" class="show_view icon-search" data-view="Search">Search</a>
-          <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>         
-        </div>
-
-        <div id="searchView" class="view">
-          <ul id="searchResults"></ul>
-        </div>
-        <div id="bookmarksView" class="view">
-          <ul id="bookmarks"></ul>
-        </div>
-      </div>
-      <div id="main">
-        <div id="titlebar">
-            <div id="opener">
-                <a id="slider" class="icon-menu" href="index.html">Menu</a>
+        <div id="sidebar">
+            <div id="panels">
+                <input id="searchBox" placeholder="search" type="search">
+                <a id="show-Search" class="show_view icon-search" data-view="Search">Search</a>
+                <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>         
             </div>
-          <div id="metainfo">
-            <span id="book-title"></span>
-            <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
-            <span id="chapter-title"></span>
-          </div>
-          <div id="title-controls">
-            <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
-            <a id="setting" class="icon-cog">Settings</a>
-          </div>
+
+            <div id="searchView" class="view">
+                <ul id="searchResults"></ul>
+            </div>
+            <div id="bookmarksView" class="view">
+                <ul id="bookmarks"></ul>
+            </div>
         </div>
-        
-        <div id="divider"></div>
-        <div id="prev" class="arrow">‹</div>
-        <div id="viewer"></div>
-        <div id="next" class="arrow">›</div>
-        
-        <div id="loader"><img src="img/loader.gif"></div>
-      </div>
-      <div class="modal md-effect-1" id="settings-modal">
-          <div class="md-content">
-              <h3>Settings</h3>
-              <div>
-                  <p>
-                    <input type="checkbox" id="sidebarReflow" name="sidebarReflow">Reflow text on rotate.</input>
-                  </p>
-              </div>
-              <div class="closer icon-cancel-circled"></div>
-          </div>
-      </div>
-      <div class="overlay"></div>
+        <div id="main">
+            <div id="titlebar">
+                <div id="opener">
+                    <a id="slider" class="icon-menu" href="bookshelf.html">Menu</a>
+                </div>
+                <div id="metainfo">
+                    <span id="book-title"></span>
+                    <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
+                    <span id="chapter-title"></span>
+                </div>
+                <div id="title-controls">
+                    <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
+                    <a id="setting" class="icon-cog">Settings</a>
+                </div>
+            </div>
+
+            <div id="divider"></div>
+            <div id="prev" class="arrow">‹</div>
+            <div id="viewer"></div>
+            <div id="next" class="arrow">›</div>
+
+            <div id="loader"><img src="img/loader.gif"></div>
+        </div>
+        <div class="modal md-effect-1" id="settings-modal">
+            <div class="md-content">
+                <h3>Settings</h3>
+                <div>
+                    <p><input type="checkbox" id="sidebarReflow" name="sidebarReflow">Reflow text on rotate.</input></p>
+                </div>
+                <div class="closer icon-cancel-circled"></div>
+            </div>
+        </div>
+    <div class="overlay"></div>
     </body>
 </html>

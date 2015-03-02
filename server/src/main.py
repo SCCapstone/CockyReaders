@@ -14,7 +14,8 @@ from __builtin__ import int
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
-Host = "http://localhost:9080/"
+#Host = "http://localhost:9080/"
+Host = "http://www.cockyreaders-test.appspot.com/"
 
 class MainPage(webapp2.RequestHandler):        
     def setupUser(self): 

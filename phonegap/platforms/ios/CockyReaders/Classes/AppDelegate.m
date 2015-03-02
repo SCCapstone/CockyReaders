@@ -88,6 +88,8 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
+    [application setStatusBarHidden:YES];
+    
     return YES;
 }
 
