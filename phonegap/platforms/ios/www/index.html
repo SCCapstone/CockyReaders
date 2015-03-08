@@ -1,37 +1,50 @@
+<!-- Login Page -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="application/javascript" src="js/bookcase.js"></script>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-       <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
-        <link rel="stylesheet" type="text/css" href="css/bookshelf.css">
-        <title>Test Student's Bookshelf</title>
-    </head>
-    <body>
-         <table width="100%" style="margin-left:-3px;">
-    <tbody><tr class="bookshelf">
-        <td>
-            <span class="bookshelf-title">
-                <a class="bookshelf-name-link">
-                    Test Student's Bookshelf
-                </a>                
-            </span>
-   
-            <div class="grid_11 alpha omega bookshelf-body">
-            <div id="bookshelf" class="grid_10 alpha omega" style="padding-left:40px">
-                
-            </div>
-            </div>
-        </td>
-    </tr>
-</tbody></table>
-        <script type="text/javascript" src="js/cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <!--<script type="text/javascript" src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-    </body>
+<head>
+	<title>Login Page</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
+	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta name="format-detection" content="telephone=no" />
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
+    
+</head>
+
+<body>
+	<h1 style="font-family:Comic Sans MS; color:#73000A; text-align:center">
+	Cocky's Reading Express</h1>
+
+<!-- Change the action to take us to the bookshelf -->
+<form id="loginForm" style="font-family:Comic Sans MS" align="middle">
+	
+	<!-- Username: <br> -->
+
+	<input type="text" name="user" style="font-family:Comic Sans MS"
+	value="Username">
+	<br>
+
+	<!-- User Password: <br> -->
+
+	<input type="password" name="password" style="font-family:Comic Sans MS"
+	value="Password">
+	<br><br>
+
+	<input type="button" value="Login" onclick="GET_Login()">
+	
+</form>
+       
+    <div align="center">
+        <button id="registerButton" onclick='location.href = "register.html"'>Register</button>
+    </div>
+
+
+
+<!-- Need to add Cocky pic and USC logo to www/img folder and then pull from there -->
+  <img src="img/cocky.jpg" alt="Cocky" style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
+  
+  <img src="img/usc_logo.png" alt="USC Logo" style="position: absolute; top: 250px; right:50px;;width:100px;height:100px">
+    
+</body>
 </html>

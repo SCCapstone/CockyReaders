@@ -10,22 +10,15 @@ import json
 
 from google.appengine.api import users
 from google.appengine.ext import db
-from google.appengine.api.validation import Repeated
+from __builtin__ import int
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
-Host = "HTTP://localhost:8080/"
+#Host = "http://localhost:9080/"
+Host = "http://www.cockyreaders-test.appspot.com/"
 
 class MainPage(webapp2.RequestHandler):        
     def setupUser(self): 
-            self.template_values = {}
-            self.currentUser = users.get_current_user()  
-            self.template_values['user'] = self.currentUser
-            if self.currentUser:
-                self.template_values['login'] = users.create_logout_url("/")
-            else:
-                self.template_values['login'] = users.create_login_url(self.request.uri)
-       
         self.template_values = {}
         self.currentUser = users.get_current_user()  
         self.template_values['user'] = self.currentUser
@@ -61,28 +54,34 @@ class MainPage(webapp2.RequestHandler):
         return theStudent   
 #class for login side of the app        
 class LoginHandler(MainPage):
-    def get(self):
+    def get(self, stuff):
         loginUser = self.request.get('user')
         loginPassword = self.request.get('password')
             
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(key_name= 1,firstName="temp", lastName="temp", userName="theFirst", password="password", books=[1113,1114])
+            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", books=[1113,1114])
             newStudent.put()
         #this does now work properly unless the key_name of each entry is that of the UserName
         #currently the key_name is the student id		
         #key = db.Key.from_path('Student', loginUser )
         #theStudent = db.get(key)
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1"+"WHERE password = :2",loginUser,loginPassword)
-		
+        q = db.GqlQuery("SELECT * FROM Student WHERE user = :1 AND password = :2", loginUser, loginPassword)
+        logging.info(q.count())
+        
         self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-        self.response.out.headers['Content-Type'] = "text/json"
-		if q.count() == 0:
-           self.response.out.write("Failure")
+
+        if q.count() == 0:
+            self.response.out.write("Failure")
+            self.error(500)
         else:
-            self.response.out.write("Success")
-    def post(self):
+            logging.info("Login successful")
+            currentUser = q.get()
+            self.response.out.headers['Content-Type'] = "text/json"
+            self.response.out.write(json.dumps(currentUser.user))
+            
+    def post(self, stuff):
         newUserName = self.request.get('user')
         newUserPassword = self.request.get('password')
         newUserFirstName = self.request.get('firstName')
@@ -90,24 +89,31 @@ class LoginHandler(MainPage):
         newUserTeacher = self.request.get('teacher')
         newUserGrade = self.request.get('grade')
         newUserPin = self.request.get('pinNumber')
-        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-        self.response.out.headers['Content-Type'] = "text/json"
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1",newUserName)
+
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1", newUserName)
         if q.count() >= 1:
             #return error that this invalid
             self.response.out.write("Failure")
             logging.debug("invalid user being added")
         else:
             #if error here, remove the int cast and just let the userpin be a string
-            newUser = student(key_name=int(newUserPin),firstName = newUserFirstName,lastname = newUserLastName, userName = newUserName, password = newUserPassword
-                          teacher=newUserteacher,grade = int(newUserGrade),books=[1113,1114])
+            newUser = Student(user = newUserName,
+                              firstName = newUserFirstName,
+                              lastName = newUserlastName, 
+                              password = newUserPassword,
+                              teacher = newUserTeacher,
+                              grade = int(newUserGrade),
+                              bookList = [1113, 1114])
+
             #compare USerName and return if invalid  
             newUser.put()
             #for setting up users
+            self.response.out.headers['Content-Type'] = "text"
+            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.write("Success")
+            logging.info("Hello!2")
     
 class BookHandler(MainPage):
-    def get(self, bookID):   
     def get(self, bookID): 
                 
         self.setupUser()
@@ -119,29 +125,25 @@ class BookHandler(MainPage):
         if (query.count() == 0):
             newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1114])
             newStudent.put()
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE userName = :1",loginUser)
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",loginUser)
         theStudent = Student()
         for p in q.run(limit=1):
             theStudent = p
         if theStudent == None:
-		    libaryList = [1113,1114,1115]
+            libaryList = [1113,1114,1115]
         else:	
-            libaryList = theStudent.books
-        query = Book.all()
+            libaryList = theStudent.bookList
 
         query = Book.all();
         #DEMO CODE
         if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = Host+"/libary/1113",link = Host+"/libary/1115")
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
             newBook.put()
         
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = Host+"/libary/1114",link = Host+"/libary/1114")
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
             newBook.put()
  
-            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover = Host+"/libary/1115" , link = Host+"/libary/1115")
-            newBook = Book(title = "Angels and Demons", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg")
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
             newBook.put()
             
             query = Book.all()
@@ -154,19 +156,9 @@ class BookHandler(MainPage):
             for isbnN in libaryList:
                 q = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(isbnN))
                 for book in q.run(limit=1):
-				   books.append(book.dict())
-            for book in query:
-                books.append(book.dict())
+                    books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
-        
-class UserMangament(MainPage):
-    def get(self):
-    def post(self):	
-class LibaryHandler(MainPage):
-    def get(self):
-    def post(self):	
-        
         
 class StudentHandler(MainPage):
     def get(self, studentID):
@@ -188,14 +180,19 @@ class StudentHandler(MainPage):
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
 
-        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade),books=[1113,1114] pagesRead = 0)
-        newStudent = Student(firstName = fName, lastName = lName, teacher = teacher, grade = int(grade), pagesRead = 0)
+        newStudent = Student(firstName = fName,
+                             lastName = lName,
+                             teacher = teacher, 
+                             grade = int(grade),
+                             books=[1113,1114],
+                             pagesRead = 0)
         newStudent.put()
         
         self.redirect('/student')            
         return
             
 class Student(db.Model):
+    user = db.StringProperty()
     firstName = db.StringProperty()
     lastName = db.StringProperty()
     teacher = db.StringProperty()
@@ -205,7 +202,7 @@ class Student(db.Model):
     timeReading = db.IntegerProperty()
     
     password = db.StringProperty()
-    books = db.ListProperty(long)
+    bookList = db.ListProperty(int)
     
     def id(self):
         return self.key().id()
@@ -220,12 +217,13 @@ class Student(db.Model):
         theStudentDict['pagesRead'] = self.pagesRead
         theStudentDict['isbnList'] = self.books
         return theStudentDict
+    
 class Book(db.Model):
     title = db.StringProperty()
     genre = db.StringProperty()
     isbn = db.IntegerProperty()
     cover = db.StringProperty()
-    libaryLink = db.StringProperty()
+    link = db.StringProperty()
 
     def dict(self):
         theBookDict = {}
@@ -233,7 +231,8 @@ class Book(db.Model):
         theBookDict['genre'] = self.genre
         theBookDict['isbn'] = self.isbn
         theBookDict['cover'] = self.cover
-		theBookDict['link'] =self.libaryLink
+        theBookDict['link'] = self.link
+        
         return theBookDict
 
 #class Bookshelf(db.Model):#   books = db.ListProperty(long)
@@ -242,6 +241,4 @@ class Book(db.Model):
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
                                ('/book()', BookHandler), ('/login()',LoginHandler),
-                               ('/.*', MainPage)], debug=True)
-                               ('/book()', BookHandler),
                                ('/.*', MainPage)], debug=True)
