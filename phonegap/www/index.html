@@ -7,6 +7,9 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
 	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<meta name="format-detection" content="telephone=no" />
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
 </head>
 
 <body>
@@ -14,26 +17,24 @@
 	Cocky's Reading Express</h1>
 
 <!-- Change the action to take us to the bookshelf -->
-<form style="font-family:Comic Sans MS" align="middle" action="CockyReaders/phonegap/www/index.html" method="POST">
+<form style="font-family:Comic Sans MS" align="middle" id="loginForm">
 	<font size="5">
 	<!-- Username: <br> -->
 
-	Username: <input type="text" name="Username" style="font-family:Comic Sans MS"
-	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false value="Username">
-	<br>
+	Username: <input type="text" name="user" style="font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	
+    <br></br>
 	<!-- User Password: <br> -->
 	Password: <input type="password" name="password" style="font-family:Comic Sans MS"
-	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false value="Password">
+	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 	<br><br>
-
-	<input type="submit" style="height:75px; width:100px" value="Login">
-	
-	<!-- change the onclick action to take to register page -->
-	<button onclick="CockyReaders/phonegap/www/register.html" style="height:75px; width:100px">Register</button>
 
 	</font>
 </form>
-
+    <div align="center"> 
+<button onclick="GET_Login();" value="Login" style="height:75px; width:100px">Login</button>	    
+<button onclick='location.href = "register.html"' style="height:75px; width:100px">Register</button>
+    </div>
 
 <img src="http://www.lawctopus.com/wp-content/uploads/2013/10/cocky.jpg" alt="Cocky"
 style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">

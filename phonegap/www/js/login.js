@@ -1,11 +1,13 @@
 function GET_Login(theForm) {
     
+    
     outAJAX++;
     var theForm = document.getElementById("loginForm");
     
     data = {"user": theForm.user.value,
-            "password": theForm.password.value}
+            "password": theForm.password.value} 
     
+    console.log("Hello")
    $.ajax('http://www.cockyreaders-test.appspot.com/login', {
         type: 'GET',
         data: data,
