@@ -14,6 +14,13 @@
         <title>Test Student's Bookshelf</title>
     </head>
     <body>
+<<<<<<< HEAD
+        
+=======
+        <a href="index.html">
+  		<input type="button" align="top|right" value="Log Out">
+	</a>
+>>>>>>> master
         <table width="100%" style="margin-left:-3px;">
             <tbody><tr class="bookshelf">
             
