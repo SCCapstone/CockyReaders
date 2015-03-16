@@ -1,5 +1,7 @@
 function updateView() {
     console.log("Updating the view!");
+    var header = document.getElementById("bookshelfName");
+    header.innerHTML = getCookie("user") + "'s Bookshelf";
     updateBookcase();
 }
 
@@ -93,11 +95,11 @@ function updateBookcase() {
 }
 
 function test(index) {
-            console.log("Clear book URL");
-            setCookie("bookURL", "", 1);
-            console.log("Reset Book URL");
-            setCookie("bookURL", bookList[index].link, 1);
-            window.location = "reader.html";  
+    console.log("Clear book URL");
+    setCookie("bookURL", "", 1);
+    console.log("Reset Book URL"); 
+    setCookie("bookURL", bookList[index].link, 1);
+    window.location = "reader.html";  
 }
 
 // Function to get the username from a cookie
@@ -129,7 +131,7 @@ function GET_Books() {
             user: getCookie("user"),
             fmt: 'json',
         },
-        success: function(data){			
+        success: function(data){
             bookList = data;
             updateView();
             console.log('Books loaded.');
