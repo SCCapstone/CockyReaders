@@ -7,66 +7,54 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
 	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<meta name="format-detection" content="telephone=no" />
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log("ready");
+        });       
+    </script>
   </head>
   
-  <body>
+  <body style="overflow:hidden">
   	<h1 style="font-family:Comic Sans MS; color:black; text-align:center">
   	Cocky's Reading Express</h1>
   
   <!-- Change the action to take us to the login page so they can relogin -->
-  <form style="font-family:Comic Sans MS" align="middle" action="login_action_page.php" method="POST">
+  <form style="font-family:Comic Sans MS; padding-right:25%" align="right" id="registerForm">
   	
   	<font size="5">
   	<!-- What is your first Name? -->
   
-  	First Name: <input type="text" name="firstName" size="40" style="font-family:Comic Sans MS"
-  	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false>
+  	First Name: <input type="text" name="firstName" size="40" style="padding-bottom:10px; height:20px; font-size:18pt;font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   	<br>
   
-	<!-- What is your last Name? -->
-  
-  	Last Name: <input type="text" name="lastName" size="40" style="font-family:Comic Sans MS"
-  	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	Last Name: <input type="text" name="lastName" size="40" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   	<br>
-  	<!-- Create a username! -->
-	Username: <input type="text" name="userName" size="40" style="font-family:Comic Sans MS"
-  	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        
+	Username: <input type="text" name="user" size="40" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   	<br>
-  	<!-- Create a password! -->
-	Password: <input type="text" name="password" size="40" style="font-family:Comic Sans MS"
-	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false>
+
+    Password: <input type="text" name="password" size="40" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   	<br>
 
   	<!-- Who is your teacher? -->
 
-	Teacher: <input type="text" name="teacher" size="40" style="font-family:Comic Sans MS"
-  	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	Teacher: <input type="text" name="teacher" size="40" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   	<br>
   
-
-	<!-- What is your Lunch Pin? -->
-
-  	Lunch Pin:<input type="text" name="lunchPin" size="40" style="font-family:Comic Sans MS"
-  	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	Lunch Pin:
+        <input type="text" name="pinNumber" size="40" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 	<br>
-	
-	<!-- What grade are you in? -->
-	
-	What grade are you in?
-	<input type="number" name ="grade" min="0" max="5" style="font-family:Comic Sans MS"
-	autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false>
+    <br>
+    What grade are you in?
+	<input type="number" name ="grade" min="0" max="5" style="align:center; padding-right:25%; height:30px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if (event.keyCode == 13) document.getElementById('registerButton').click()">
 	
   	<br><br>
-	<a href="COckyReaders/phonegap/www/loginPage.html">
-  		<input type="submit" value="I'm Done!" style="height:75px; width:100px">
-	</a>
+	<input id="registerButton" style="text-align: center; font-size:18pt; height:100px; width:150px" type="button" value="I'm Done!" onclick="POST_Login();">
   	</font>
   </form>
   
-  <!-- Need to add Cocky pic and USC logo to www/img folder and then pull from there -->
-  <img src="http://www.lawctopus.com/wp-content/uploads/2013/10/cocky.jpg" alt="Cocky"
-  style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
-  
-  
+  <img src="img/cocky.jpg" alt="Cocky" style="position: absolute; top: 200px; left:10px; width: 200px; height: 200px">
   </body>
 </html>
