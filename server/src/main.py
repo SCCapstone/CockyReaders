@@ -104,14 +104,15 @@ class LoginHandler(MainPage):
                               teacher = newUserTeacher,
                               grade = int(newUserGrade),
                               bookList = [1113, 1114])
-
-            #compare USerName and return if invalid  
-            newUser.put()
-            #for setting up users
+            newUser.put()   
+            newStat = Stat(parent = newUser, isbn = 1113, owner = newUserName, pagesRead = 0, bookmark = 1)
+            newStat.put()
+            newStat = Stat(parent = newUser, isbn = 1114, owner = newUserName, pagesRead = 0, bookmark = 1)
+            newStat.put()
+            
             self.response.out.headers['Content-Type'] = "text"
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.write("Success")
-            logging.info("Hello!2")
     
 class BookHandler(MainPage):
     def get(self, bookID): 
@@ -159,7 +160,25 @@ class BookHandler(MainPage):
                     books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
-        
+class UpdateStats(MainPage):
+    def get():
+        User = self.request.get('User')
+        Isbn = self.request.get('isbn')
+		q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
+		for record in q.run(limit = 1):
+		    self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+            self.response.out.headers['Content-Type'] = "text/json"
+			self.response.out.write(json.dumps(record.dict())
+    def post():
+        User = self.request.get('User')
+        Isbn = self.request.get('isbn')
+        Bookmark = self.request.get('Bookmark')
+        PagesRead = self.request.get('pagesRead')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
+        for record in q.run():
+            record.bookmark = int(Bookmark)
+            if(PagesRead > record.pagesRead):
+            record.pagesRead = PagesRead        		
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -190,7 +209,39 @@ class StudentHandler(MainPage):
         
         self.redirect('/student')            
         return
-            
+class AddBooks(MainPage):
+    def post():
+        User = self.request.get('user')
+        Isbn = self.request.get('isbn')
+        q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",User)
+        q2 = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(Isbn))
+        if (q2.count > 0):
+            for user in q.run(limit = 1):
+                user.books.append(int(Isbn))
+            self.response.out.headers['Content-Type'] = "text"
+            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+            self.response.out.write("Success")
+        else:
+            self.response.out.headers['Content-Type'] = "text"
+            self.response.out.write("Failure")
+class Libary(MainPage):
+    def get():
+	#returns all the books in the libary
+        q = Book.all()
+        books = [] 
+        for book in q:
+            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+            self.response.out.headers['Content-Type'] = "text/json"
+        self.response.out.write(json.dumps(books))
+    def post():	
+	#note the book file should be transferred using standard ftp and then this record should be added
+	#do not post this first
+        Title = self.request.get('title')
+        Isbn = self.request.get('isbn')
+        Genre = self.request.get('genre')
+        Cover = self.request.get('cover')
+        Link = self.request.get('link')
+        newbook = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = cover, link = Host + Link)
 class Student(db.Model):
     user = db.StringProperty()
     firstName = db.StringProperty()
@@ -234,11 +285,22 @@ class Book(db.Model):
         theBookDict['link'] = self.link
         
         return theBookDict
-
+class Stat(db.Model):
+    isbn = db.IntegerProperty()
+    owner = db.StringProperty()
+    pagesRead = db.StringProperty()
+    bookmark = db.IntegerProperty()	
+    def dict(self):
+        stat = {}
+        stat['bookmark'] = self.bookmark
+        stat['pagesRead'] = self.pagesRead
+        return stat
+    
 #class Bookshelf(db.Model):#   books = db.ListProperty(long)
 #  sort = db.IntegerProperty() # Sort by this variable
 # positions = db.ListProperty(long)
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
-                               ('/book()', BookHandler), ('/login()',LoginHandler),
+                               ('/book()', BookHandler), ('/login()',LoginHandler), ('/stats()', UpdateStats),
+							   ('/addBook()',AddBooks), ('/libary()',Libary),
                                ('/.*', MainPage)], debug=True)
