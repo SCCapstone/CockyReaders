@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="displaybox">
+		<div class="displaybox">
+		Enter new student:<br>
+		<p>Add a book to a user libary<p>
+		<form method="post" action="/addbook/">
+     		User:<input type="text" name="user"/><br>
+      		ISBN:<input type="number" name="isbn"/><br>    
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+  	</div>
+    </div>
+{% endblock %}

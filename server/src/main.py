@@ -161,15 +161,18 @@ class BookHandler(MainPage):
             self.response.out.write(json.dumps(books))
             return       
 class UpdateStats(MainPage):
-    def get():
+    def get(self, stuff):
         User = self.request.get('User')
         Isbn = self.request.get('isbn')
-		q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
-		for record in q.run(limit = 1):
-		    self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-            self.response.out.headers['Content-Type'] = "text/json"
-			self.response.out.write(json.dumps(record.dict())
-    def post():
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
+        returnRecord = {} 
+        for record in q.run(limit = 1):
+            returnRecord.append(record.dict())
+        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+        self.response.out.headers['Content-Type'] = "text/json"
+        self.response.out.write(json.dumps(returnRecord))
+        return
+    def post(self, stuff):
         User = self.request.get('User')
         Isbn = self.request.get('isbn')
         Bookmark = self.request.get('Bookmark')
@@ -178,7 +181,9 @@ class UpdateStats(MainPage):
         for record in q.run():
             record.bookmark = int(Bookmark)
             if(PagesRead > record.pagesRead):
-            record.pagesRead = PagesRead        		
+                record.pagesRead = PagesRead
+                db.put(record)
+        return			
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -210,7 +215,11 @@ class StudentHandler(MainPage):
         self.redirect('/student')            
         return
 class AddBooks(MainPage):
-    def post():
+    def get(self, stuff):
+        self.setupUser()
+        self.template_values['title'] = 'Student Books'
+        self.render('booklist.html')
+    def post(self, stuff):
         User = self.request.get('user')
         Isbn = self.request.get('isbn')
         q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",User)
@@ -225,7 +234,7 @@ class AddBooks(MainPage):
             self.response.out.headers['Content-Type'] = "text"
             self.response.out.write("Failure")
 class Libary(MainPage):
-    def get():
+    def get(self):
 	#returns all the books in the libary
         q = Book.all()
         books = [] 
@@ -233,7 +242,7 @@ class Libary(MainPage):
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.headers['Content-Type'] = "text/json"
         self.response.out.write(json.dumps(books))
-    def post():	
+    def post(self):	
 	#note the book file should be transferred using standard ftp and then this record should be added
 	#do not post this first
         Title = self.request.get('title')
