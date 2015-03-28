@@ -4,7 +4,10 @@
 		<div class="displaybox">
 		<p>Add a book listing to the library</p>
 		<p> Admin only </p>
-		<form method="post" action="/Libary/">
+		<p>Beta Note: perform a FTP file upload of the book before filling
+		this form out, this form is only for locating books and currently
+		does not support uploading book directly</p>
+		<form method="post" action="/libary/">
      		Title:<input type="text" name="title"/><br>
       		ISBN:<input type="number" name="isbn"/><br>
 			Genre:<input type="text" name="genre"/><br>  
@@ -14,6 +17,7 @@
   	 	</form>
 		<p>{{ success }} </P>
   	</div>
+	<br>
     </div>
 	{% for book in books %}
 	<div class="displaybox">

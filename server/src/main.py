@@ -221,27 +221,36 @@ class StudentHandler(MainPage):
         self.redirect('/student')            
         return
 class AddBooks(MainPage):
-    def get(self):
+    def get(self, stuff):
         self.setupUser()
         self.template_values['title'] = 'Student Books'
         self.template_values['Returnsuccess'] = ''
         self.render('booklist.html')
         return
-    def post(self):
-        User = self.request.get('user')
+    def post(self, stuff):
+        self.setupUser()
+        UserName = self.request.get('user')
         Isbn = self.request.get('isbn')
-        q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",User)
-        q2 = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(Isbn))
-        if (q2.count > 0 and q.count > 0):
-            for user in q.run(limit = 1):
-                user.books.append(int(Isbn))
-                user.put()
-            self.template_values['success'] = "Success"
+        if (UserName != '' and Isbn != ''):
+            q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",UserName)
+            q2 = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(Isbn))
+            if (q2.count() > 0 and q.count() > 0):
+                for userN in q.run(limit = 1):
+                    userN.bookList.append(int(Isbn))
+                    userN.put()
+            #self.redirect('/addBook')
+                self.template_values['Returnsuccess'] = "Success"
+                self.render('booklist.html')
+            else:
+            #self.redirect('/addBook')
+                self.template_values['Returnsuccess'] = "Failure"
+                self.render('booklist.html')
         else:
-            self.template_values['success'] = "Failure"
+            self.template_values['Returnsuccess'] = "Failure"
+            self.render('booklist.html')
         return
 class Libary(MainPage):
-    def get(self):
+    def get(self, stuff):
 	#returns all the books in the libary
         self.setupUser()
         q = Book.all()
@@ -250,7 +259,7 @@ class Libary(MainPage):
         self.template_values['title']='Libary'
         self.template_values['books'] = q
         self.render('libarylist.html')
-    def post(self):	
+    def post(self, stuff):	
 	#note the book file should be transferred using standard ftp and then this record should be added
 	#do not post this first
         Title = self.request.get('title')
@@ -258,8 +267,9 @@ class Libary(MainPage):
         Genre = self.request.get('genre')
         Cover = self.request.get('cover')
         Link = self.request.get('link')
-        newbook = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = cover, link = Host + Link)
-        self.redirect('/Libary')
+        newbook = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = Cover, link = Host + Link)
+        newbook.put()
+        self.redirect('/libary')
         return
 class Student(db.Model):
     user = db.StringProperty()

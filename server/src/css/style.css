@@ -95,6 +95,8 @@ li {
 #footer {
 	width: 100%;
 	margin-top: -2em;
+	position: absolute;
+	bottom: 0px;
 	/* footer is 2em high, 1 for text +.5+.5 of padding */
 	text-align: center;
 	border-top: 1pt solid;

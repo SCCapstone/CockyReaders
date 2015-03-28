@@ -2,9 +2,11 @@
 {% block body %}
 	<div class="displaybox">
 		{% if user %}
+		    <p>BETA Admin View </p>
    		 	<ul>
-   		 	<li><a href="/student">My Students</a></li>
-			<li><a href="/addBook">Add Books</a></li>
+   		 	<li><a href="/student">Your Students</a></li>
+			<li><a href="/addBook">Student Books</a></li>
+			<li><a href="/libary">Global Library</a></li>
    		 	</ul>
     	{% else %}
     		You must login first.
