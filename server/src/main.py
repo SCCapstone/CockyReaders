@@ -113,7 +113,7 @@ class LoginHandler(MainPage):
             self.response.out.headers['Content-Type'] = "text"
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.write("Success")
-    
+#class for handling the sending of book info to app
 class BookHandler(MainPage):
     def get(self, bookID): 
                 
@@ -160,6 +160,7 @@ class BookHandler(MainPage):
                     books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
+#app side update of stats for users
 class UpdateStats(MainPage):
     def get(self, stuff):
 	    #mostly place holder
@@ -184,7 +185,23 @@ class UpdateStats(MainPage):
             if(PagesRead > record.pagesRead):
                 record.pagesRead = PagesRead
                 db.put(record)
-        return			
+        return	
+#admin Side stat catalogue
+class StatQuery(MainPage):
+    def get(self,random):
+        self.setupUser()
+        self.template_values['title'] = 'Stats'
+        self.render('stats.html')
+        return
+    def post(self, somerandomfieldthatbreakeverythingifnothere):
+        self.setupUser()
+        Owner = self.request.get('user')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE owner = :1", Owner)
+        self.template_values['title'] = 'Stats'
+        self.template_values['stats']=q
+        self.render('stats.html')
+        return		
+#admin side user catalogue
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -217,9 +234,13 @@ class StudentHandler(MainPage):
                              bookList=[1113,1114],
                              )
         newStudent.put()
-        
+        newStat = Stat(parent = newStudent, isbn = 1113, owner = UserName, pagesRead = 0, bookmark = 1)
+        newStat.put()
+        newStat = Stat(parent = newStudent, isbn = 1114, owner = UserName, pagesRead = 0, bookmark = 1)
+        newStat.put()
         self.redirect('/student')            
         return
+#admin side user book catalogue
 class AddBooks(MainPage):
     def get(self, stuff):
         self.setupUser()
@@ -249,6 +270,7 @@ class AddBooks(MainPage):
             self.template_values['Returnsuccess'] = "Failure"
             self.render('booklist.html')
         return
+#admin side global book catalogue
 class Libary(MainPage):
     def get(self, stuff):
 	#returns all the books in the libary
@@ -271,6 +293,7 @@ class Libary(MainPage):
         newbook.put()
         self.redirect('/libary')
         return
+#database side user model
 class Student(db.Model):
     user = db.StringProperty()
     firstName = db.StringProperty()
@@ -295,7 +318,7 @@ class Student(db.Model):
         theStudentDict['grade'] = self.grade
         theStudentDict['isbnList'] = self.bookList
         return theStudentDict
-    
+#database side book model  
 class Book(db.Model):
     title = db.StringProperty()
     genre = db.StringProperty()
@@ -312,10 +335,12 @@ class Book(db.Model):
         theBookDict['link'] = self.link
         
         return theBookDict
+#database side statistic model
 class Stat(db.Model):
     isbn = db.IntegerProperty()
     owner = db.StringProperty()
-    pagesRead = db.StringProperty()
+    pagesRead = db.IntegerProperty()
+    timeSpentReading = db.IntegerProperty()
     bookmark = db.IntegerProperty()	
     def dict(self):
         stat = {}
@@ -331,4 +356,5 @@ app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)',
                                ('/book()', BookHandler), ('/login()',LoginHandler), ('/stats()', UpdateStats),
 							   ('/addBook()',AddBooks), ('/addBook/(.*)',AddBooks),
 							   ('/libary()',Libary), ('/libary/(.*)', Libary),
+							   ('/stat()', StatQuery),('/stat/(.*)', StatQuery),
                                ('/.*', MainPage)], debug=True)

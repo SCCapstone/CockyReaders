@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="displaybox">
+		<p>Find a Student Stats:</p>
+		<form method="post" action="/stat/">
+     		User Name:<input type="text" name="user"/><br>
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+  	</div>
+  	<br>
+	<div class="displaybox">
+	<table>
+	{% for stat in stats %}
+	<tr>
+   		<td>ISBN:{{ stat.isbn }}</td>
+   		<td>PagesRead: {{ stat.pagesRead}}</td>
+	</tr>
+   <br>
+	{% endfor %}
+	</table>	
+	</div>
+{% endblock %}
