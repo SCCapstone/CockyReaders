@@ -61,7 +61,7 @@ class LoginHandler(MainPage):
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", books=[1113,1114])
+            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", bookList=[1113,1114])
             newStudent.put()
         #this does now work properly unless the key_name of each entry is that of the UserName
         #currently the key_name is the student id		
@@ -162,6 +162,7 @@ class BookHandler(MainPage):
             return       
 class UpdateStats(MainPage):
     def get(self, stuff):
+	    #mostly place holder
         User = self.request.get('User')
         Isbn = self.request.get('isbn')
         q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
@@ -201,47 +202,54 @@ class StudentHandler(MainPage):
        
         fName = self.request.get('firstName')
         lName = self.request.get('lastName')
+        UserName = self.request.get('user')
+        Password = self.request.get('password')
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
+		
 
         newStudent = Student(firstName = fName,
                              lastName = lName,
+							 user = UserName,
+							 password = Password,
                              teacher = teacher, 
                              grade = int(grade),
-                             books=[1113,1114],
-                             pagesRead = 0)
+                             bookList=[1113,1114],
+                             )
         newStudent.put()
         
         self.redirect('/student')            
         return
 class AddBooks(MainPage):
-    def get(self, stuff):
+    def get(self):
         self.setupUser()
         self.template_values['title'] = 'Student Books'
+        self.template_values['Returnsuccess'] = ''
         self.render('booklist.html')
-    def post(self, stuff):
+        return
+    def post(self):
         User = self.request.get('user')
         Isbn = self.request.get('isbn')
         q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",User)
         q2 = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(Isbn))
-        if (q2.count > 0):
+        if (q2.count > 0 and q.count > 0):
             for user in q.run(limit = 1):
                 user.books.append(int(Isbn))
-            self.response.out.headers['Content-Type'] = "text"
-            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-            self.response.out.write("Success")
+                user.put()
+            self.template_values['success'] = "Success"
         else:
-            self.response.out.headers['Content-Type'] = "text"
-            self.response.out.write("Failure")
+            self.template_values['success'] = "Failure"
+        return
 class Libary(MainPage):
     def get(self):
 	#returns all the books in the libary
+        self.setupUser()
         q = Book.all()
         books = [] 
-        for book in q:
-            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-            self.response.out.headers['Content-Type'] = "text/json"
-        self.response.out.write(json.dumps(books))
+		#replace with template
+        self.template_values['title']='Libary'
+        self.template_values['books'] = q
+        self.render('libarylist.html')
     def post(self):	
 	#note the book file should be transferred using standard ftp and then this record should be added
 	#do not post this first
@@ -251,13 +259,14 @@ class Libary(MainPage):
         Cover = self.request.get('cover')
         Link = self.request.get('link')
         newbook = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = cover, link = Host + Link)
+        self.redirect('/Libary')
+        return
 class Student(db.Model):
     user = db.StringProperty()
     firstName = db.StringProperty()
     lastName = db.StringProperty()
     teacher = db.StringProperty()
     grade = db.IntegerProperty()
-    pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
     
@@ -274,8 +283,7 @@ class Student(db.Model):
         theStudentDict['lastName'] = self.lastName
         theStudentDict['teacher'] = self.teacher
         theStudentDict['grade'] = self.grade
-        theStudentDict['pagesRead'] = self.pagesRead
-        theStudentDict['isbnList'] = self.books
+        theStudentDict['isbnList'] = self.bookList
         return theStudentDict
     
 class Book(db.Model):
@@ -311,5 +319,6 @@ class Stat(db.Model):
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
                                ('/book()', BookHandler), ('/login()',LoginHandler), ('/stats()', UpdateStats),
-							   ('/addBook()',AddBooks), ('/libary()',Libary),
+							   ('/addBook()',AddBooks), ('/addBook/(.*)',AddBooks),
+							   ('/libary()',Libary), ('/libary/(.*)', Libary),
                                ('/.*', MainPage)], debug=True)

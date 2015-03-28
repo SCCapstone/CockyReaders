@@ -4,7 +4,9 @@
 		Enter new student:<br>
 		<form method="post" action="/student/">
      		First Name:<input type="text" name="firstName"/><br>
-      		Last Name:<input type="text" name="lastName"/><br>    
+      		Last Name:<input type="text" name="lastName"/><br> 
+            User Name:<input type="text" name="user"/><br>
+            Password:<input type="text" name="password"/><br>			
       		Teacher:<input type="text" name="teacher"/><br>  
       		Grade:<input type="number" min="1" max="5" name="grade"/><br>   
  	 		<input type="submit" value="Submit">
@@ -17,7 +19,7 @@
    		<p>{{ student.firstName }} {{ student.lastName }}</p>
    		<p>Grade: {{ student.grade }}</p>
    		<p>Teacher: {{ student.teacher }}</p>  
-   		<p>Pages read: {{ student.pagesRead }}</p> 		
+		<p>Books: {{student.isbnList}}</p>	
    </div>
    <br>
 	{% endfor %}

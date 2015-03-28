@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="displaybox">
+		<div class="displaybox">
+		<p>Add a book listing to the library</p>
+		<p> Admin only </p>
+		<form method="post" action="/Libary/">
+     		Title:<input type="text" name="title"/><br>
+      		ISBN:<input type="number" name="isbn"/><br>
+			Genre:<input type="text" name="genre"/><br>  
+			Cover:<input type="text" name="cover"/><br>  
+			Link:<input type="text" name="link"/><br>  			
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+		<p>{{ success }} </P>
+  	</div>
+    </div>
+	{% for book in books %}
+	<div class="displaybox">
+   		<div style="text-align:right;"></div>
+   		<p>{{ book.title }}</p>
+   		<p>ISBN: {{ book.isbn}}</p>
+   		<p>Genre: {{ book.genre }}</p>  
+   </div>
+   <br>
+	{% endfor %}
+{% endblock %}
