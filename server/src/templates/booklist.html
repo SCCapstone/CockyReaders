@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+		<div class="displaybox">
+		<p>Add a book to a user library<p>
+		<form method="post" action="/addBook/">
+     		User:<input type="text" name="user"/><br>
+      		ISBN:<input type="number" name="isbn"/><br>    
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+		<p>{{ Returnsuccess }} </P>
+  	</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="displaybox">
+		<p>Add a book listing to the library</p>
+		<p> Admin only </p>
+		<p>Beta Note: perform a FTP file upload of the book before filling
+		this form out, this form is only for locating books and currently
+		does not support uploading book directly</p>
+		<form method="post" action="/libary/">
+     		Title:<input type="text" name="title"/><br>
+      		ISBN:<input type="number" name="isbn"/><br>
+			Genre:<input type="text" name="genre"/><br>  
+			Cover:<input type="text" name="cover"/><br>  
+			Link:<input type="text" name="link"/><br>  			
+ 	 		<input type="submit" value="Submit">
+  	 	</form>
+		<p>{{ success }} </P>
+    </div>
+	<br>
+	<div class="displaybox">
+	<p>Books : </p>
+	<table>
+	{% for book in books %}
+	<tr>
+   		<td>{{ book.title }}</td>
+   		<td>ISBN: {{ book.isbn}}</td>
+   		<td>Genre: {{ book.genre }}</td> 
+	</tr>
+	{% endfor %}
+    </table>	
+   </div>
+   <br>
+	
+{% endblock %}

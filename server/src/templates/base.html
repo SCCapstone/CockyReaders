@@ -13,7 +13,7 @@
 			<div id="header">
 				<div class="right">
 					{% if user %}
-						<a href="/board">My Students</a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
+						<a href="/board">Home</a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
 					{% else %}
 						<a href='{{ login }}'>Login</a>
 				    {% endif %}

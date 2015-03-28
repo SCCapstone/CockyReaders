@@ -61,7 +61,7 @@ class LoginHandler(MainPage):
         #demo user
         query = Student.all()
         if query.count() == 0:
-            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", books=[1113,1114])
+            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", bookList=[1113,1114])
             newStudent.put()
         #this does now work properly unless the key_name of each entry is that of the UserName
         #currently the key_name is the student id		
@@ -104,15 +104,16 @@ class LoginHandler(MainPage):
                               teacher = newUserTeacher,
                               grade = int(newUserGrade),
                               bookList = [1113, 1114])
-
-            #compare USerName and return if invalid  
-            newUser.put()
-            #for setting up users
+            newUser.put()   
+            newStat = Stat(parent = newUser, isbn = 1113, owner = newUserName, pagesRead = 0, bookmark = 1)
+            newStat.put()
+            newStat = Stat(parent = newUser, isbn = 1114, owner = newUserName, pagesRead = 0, bookmark = 1)
+            newStat.put()
+            
             self.response.out.headers['Content-Type'] = "text"
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.write("Success")
-            logging.info("Hello!2")
-    
+#class for handling the sending of book info to app
 class BookHandler(MainPage):
     def get(self, bookID): 
                 
@@ -159,7 +160,48 @@ class BookHandler(MainPage):
                     books.append(book.dict())
             self.response.out.write(json.dumps(books))
             return       
-        
+#app side update of stats for users
+class UpdateStats(MainPage):
+    def get(self, stuff):
+	    #mostly place holder
+        User = self.request.get('User')
+        Isbn = self.request.get('isbn')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
+        returnRecord = {} 
+        for record in q.run(limit = 1):
+            returnRecord.append(record.dict())
+        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
+        self.response.out.headers['Content-Type'] = "text/json"
+        self.response.out.write(json.dumps(returnRecord))
+        return
+    def post(self, stuff):
+        User = self.request.get('User')
+        Isbn = self.request.get('isbn')
+        Bookmark = self.request.get('Bookmark')
+        PagesRead = self.request.get('pagesRead')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
+        for record in q.run():
+            record.bookmark = int(Bookmark)
+            if(PagesRead > record.pagesRead):
+                record.pagesRead = PagesRead
+                db.put(record)
+        return	
+#admin Side stat catalogue
+class StatQuery(MainPage):
+    def get(self,random):
+        self.setupUser()
+        self.template_values['title'] = 'Stats'
+        self.render('stats.html')
+        return
+    def post(self, somerandomfieldthatbreakeverythingifnothere):
+        self.setupUser()
+        Owner = self.request.get('user')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE owner = :1", Owner)
+        self.template_values['title'] = 'Stats'
+        self.template_values['stats']=q
+        self.render('stats.html')
+        return		
+#admin side user catalogue
 class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
@@ -177,27 +219,87 @@ class StudentHandler(MainPage):
        
         fName = self.request.get('firstName')
         lName = self.request.get('lastName')
+        UserName = self.request.get('user')
+        Password = self.request.get('password')
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
+		
 
         newStudent = Student(firstName = fName,
                              lastName = lName,
+							 user = UserName,
+							 password = Password,
                              teacher = teacher, 
                              grade = int(grade),
-                             books=[1113,1114],
-                             pagesRead = 0)
+                             bookList=[1113,1114],
+                             )
         newStudent.put()
-        
+        newStat = Stat(parent = newStudent, isbn = 1113, owner = UserName, pagesRead = 0, bookmark = 1)
+        newStat.put()
+        newStat = Stat(parent = newStudent, isbn = 1114, owner = UserName, pagesRead = 0, bookmark = 1)
+        newStat.put()
         self.redirect('/student')            
         return
-            
+#admin side user book catalogue
+class AddBooks(MainPage):
+    def get(self, stuff):
+        self.setupUser()
+        self.template_values['title'] = 'Student Books'
+        self.template_values['Returnsuccess'] = ''
+        self.render('booklist.html')
+        return
+    def post(self, stuff):
+        self.setupUser()
+        UserName = self.request.get('user')
+        Isbn = self.request.get('isbn')
+        if (UserName != '' and Isbn != ''):
+            q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",UserName)
+            q2 = db.GqlQuery("SELECT * FROM Book " + "WHERE isbn = :1",int(Isbn))
+            if (q2.count() > 0 and q.count() > 0):
+                for userN in q.run(limit = 1):
+                    userN.bookList.append(int(Isbn))
+                    userN.put()
+            #self.redirect('/addBook')
+                self.template_values['Returnsuccess'] = "Success"
+                self.render('booklist.html')
+            else:
+            #self.redirect('/addBook')
+                self.template_values['Returnsuccess'] = "Failure"
+                self.render('booklist.html')
+        else:
+            self.template_values['Returnsuccess'] = "Failure"
+            self.render('booklist.html')
+        return
+#admin side global book catalogue
+class Libary(MainPage):
+    def get(self, stuff):
+	#returns all the books in the libary
+        self.setupUser()
+        q = Book.all()
+        books = [] 
+		#replace with template
+        self.template_values['title']='Libary'
+        self.template_values['books'] = q
+        self.render('libarylist.html')
+    def post(self, stuff):	
+	#note the book file should be transferred using standard ftp and then this record should be added
+	#do not post this first
+        Title = self.request.get('title')
+        Isbn = self.request.get('isbn')
+        Genre = self.request.get('genre')
+        Cover = self.request.get('cover')
+        Link = self.request.get('link')
+        newbook = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = Cover, link = Host + Link)
+        newbook.put()
+        self.redirect('/libary')
+        return
+#database side user model
 class Student(db.Model):
     user = db.StringProperty()
     firstName = db.StringProperty()
     lastName = db.StringProperty()
     teacher = db.StringProperty()
     grade = db.IntegerProperty()
-    pagesRead = db.IntegerProperty()
     wordsDefined = db.IntegerProperty()
     timeReading = db.IntegerProperty()
     
@@ -214,10 +316,9 @@ class Student(db.Model):
         theStudentDict['lastName'] = self.lastName
         theStudentDict['teacher'] = self.teacher
         theStudentDict['grade'] = self.grade
-        theStudentDict['pagesRead'] = self.pagesRead
-        theStudentDict['isbnList'] = self.books
+        theStudentDict['isbnList'] = self.bookList
         return theStudentDict
-    
+#database side book model  
 class Book(db.Model):
     title = db.StringProperty()
     genre = db.StringProperty()
@@ -234,11 +335,26 @@ class Book(db.Model):
         theBookDict['link'] = self.link
         
         return theBookDict
-
+#database side statistic model
+class Stat(db.Model):
+    isbn = db.IntegerProperty()
+    owner = db.StringProperty()
+    pagesRead = db.IntegerProperty()
+    timeSpentReading = db.IntegerProperty()
+    bookmark = db.IntegerProperty()	
+    def dict(self):
+        stat = {}
+        stat['bookmark'] = self.bookmark
+        stat['pagesRead'] = self.pagesRead
+        return stat
+    
 #class Bookshelf(db.Model):#   books = db.ListProperty(long)
 #  sort = db.IntegerProperty() # Sort by this variable
 # positions = db.ListProperty(long)
     
 app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)', StudentHandler),
-                               ('/book()', BookHandler), ('/login()',LoginHandler),
+                               ('/book()', BookHandler), ('/login()',LoginHandler), ('/stats()', UpdateStats),
+							   ('/addBook()',AddBooks), ('/addBook/(.*)',AddBooks),
+							   ('/libary()',Libary), ('/libary/(.*)', Libary),
+							   ('/stat()', StatQuery),('/stat/(.*)', StatQuery),
                                ('/.*', MainPage)], debug=True)
