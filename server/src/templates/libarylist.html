@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-	<div class="displaybox">
-		<div class="displaybox">
+    <div class="displaybox">
 		<p>Add a book listing to the library</p>
 		<p> Admin only </p>
 		<p>Beta Note: perform a FTP file upload of the book before filling
@@ -16,16 +15,20 @@
  	 		<input type="submit" value="Submit">
   	 	</form>
 		<p>{{ success }} </P>
-  	</div>
-	<br>
     </div>
-	{% for book in books %}
+	<br>
 	<div class="displaybox">
-   		<div style="text-align:right;"></div>
-   		<p>{{ book.title }}</p>
-   		<p>ISBN: {{ book.isbn}}</p>
-   		<p>Genre: {{ book.genre }}</p>  
+	<p>Books : </p>
+	<table>
+	{% for book in books %}
+	<tr>
+   		<td>{{ book.title }}</td>
+   		<td>ISBN: {{ book.isbn}}</td>
+   		<td>Genre: {{ book.genre }}</td> 
+	</tr>
+	{% endfor %}
+    </table>	
    </div>
    <br>
-	{% endfor %}
+	
 {% endblock %}

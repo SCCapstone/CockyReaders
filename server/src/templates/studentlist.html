@@ -19,7 +19,12 @@
    		<p>{{ student.firstName }} {{ student.lastName }}</p>
    		<p>Grade: {{ student.grade }}</p>
    		<p>Teacher: {{ student.teacher }}</p>  
-		<p>Books: {{student.isbnList}}</p>	
+		<p>Books:</p>
+		<p>
+		{% for book in student.bookList %}
+		   {{ book }}, 
+		{% endfor %}
+		</p>
    </div>
    <br>
 	{% endfor %}
