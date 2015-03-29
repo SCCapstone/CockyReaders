@@ -9,24 +9,25 @@
 		<title>{{ title }}</title>
 	</head>
 	<body>
-		<div id="page">
-			<div id="header">
-				<div class="right">
+
+	<div id="page">
+		<div id="header">
+			<div class="right">
 					{% if user %}
 						<a href="/board">Home</a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
 					{% else %}
 						<a href='{{ login }}'>Login</a>
 				    {% endif %}
 				
-</div>
+                </div>
 			</div>
 			<div id="title"><h1>{{ title }}</h1></div>
 			<div class="content">
 				{% block body %}
 				{% endblock %}
     		</div>
-    	</div>
-    	<br>
+    	
     	<div id="footer">Designed by the CockyReaders team</div>
+	</div>
 	</body>
 </html>
