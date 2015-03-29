@@ -41,7 +41,20 @@ class MainPage(webapp2.RequestHandler):
         self.response.out.write(template.render(self.template_values))  
     
     def get(self):
-        self.setupUser();             
+        self.setupUser(); 
+        #Remove this code after dataStore Objects are created		
+        query = Book.all();
+        #DEMO CODE
+        if query.count() == 0:
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
+            newBook.put()
+        
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
+            newBook.put()
+ 
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
+            newBook.put()
+            		
         self.template_values['title'] = "Administrator View"
         self.render("main.html")    
         
@@ -278,7 +291,7 @@ class Libary(MainPage):
         q = Book.all()
         books = [] 
 		#replace with template
-        self.template_values['title']='Libary'
+        self.template_values['title']='Library'
         self.template_values['books'] = q
         self.render('libarylist.html')
     def post(self, stuff):	
