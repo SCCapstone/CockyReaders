@@ -1,3 +1,5 @@
+// STUB.
+
 function POST_Stats() {
     outAJAX++;
     $.ajax('http://www.cockyreaders-test.appspot.com/book', {
