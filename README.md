@@ -4,33 +4,14 @@ This repo represents an ongoing work for CSCE 492. The application, written on t
 
 Group Members:
 
-    Connor Bain - Sync Master (and Git Master)
-    John Phillips - Local Master
+    Connor Bain - Sync, Local, and Git Master
     Stephen Stills - Interface Master
     Andrew Mitchem - Server Master
-    Tiana Langer (Graduated Dec. 2014)
+  
+Former Members:  
 
-Work to be done this semester:
-
-    Make EPUB reader load book from local storage (January 30)
-    Establish sync protocol between server and local (February 20)
-    Establish library security protocol on server (January 30)
-    Create user database (separate from Google account) (January 30)
-    Add reading statistic tracking ability (February 27)
-    Add word lookup capability (February 27)
-    Finalize implementation of Administrator View (February 27)
-    Add Cocky design 
-    Finalize layouts of each page (February 27)
-    Finish prototype (March 4th)
-
-Optional work:
-   Allow for user registration on device
-   Incorporate graphic visualization of reading statistics 
-   Add interactivity
-   Make page swipe pretty
-   Implement SkyEPUB  
+    Tiana Langer
+    John Phillips  
    	
-To test our server visit www.cockyreaders-test.appspot.com
-
-To test our app visit www.cse.sc.edu/~bainco/www/
-
+To test our app visit www.cse.sc.edu/~bainco/cockyreaders/
+To test our Administrator View visit www.cockyreaders-test.appspot.com/
