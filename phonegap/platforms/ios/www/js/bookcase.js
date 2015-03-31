@@ -97,8 +97,12 @@ function updateBookcase() {
 function test(index) {
     console.log("Clear book URL");
     setCookie("bookURL", "", 1);
+    console.log("Clear isbn");
+    setCookie("isbn", "", 1);
     console.log("Reset Book URL"); 
     setCookie("bookURL", bookList[index].link, 1);
+    console.log("Reset isbn");
+    setCookie("isbn", bookList[index].isbn, 1);
     window.location = "reader.html";  
 }
 
@@ -122,7 +126,6 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/;";
 }
 
-// HARD CODED FOR NOW
 function GET_Books() {
     outAJAX++;
     $.ajax('http://www.cockyreaders-test.appspot.com/book', {
