@@ -12,36 +12,7 @@
         <link rel="stylesheet" href="css/popup.css">
 
         <script src="js/libs/jquery-2.1.0.min.js"></script>
-
         <script src="js/libs/zip.min.js"></script>        
-
-        <script>
-            
-            "use strict";
-            // Function to get the username from a cookie
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0; i<ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0)==' ') c = c.substring(1);
-                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-                }
-                return "";
-            }
-
-            document.onreadystatechange = function () {  
-                if (document.readyState == "complete") {
-                    EPUBJS.filePath = "js/libs/";
-                    EPUBJS.cssPath = "css/";
-                    
-                    var bookURL = getCookie("bookURL");
-                    var reader = ePubReader(bookURL, { width: 1024, height: 768 });
-                    var user = getCookie("user");
-                }  
-            };
-
-        </script>
 
         <!-- Render -->
         <script src="js/epub.min.js"></script>
@@ -64,7 +35,7 @@
 
         <!-- Full Screen -->
         <script src="js/libs/screenfull.min.js"></script>
-
+        <script src="js/book_reader.js"></script>
     </head>
     <body>
         <div id="sidebar">
@@ -92,15 +63,14 @@
                     <span id="chapter-title"></span>
                 </div>
                 <div id="title-controls">
-                    <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
                     <a id="setting" class="icon-cog">Settings</a>
                 </div>
             </div>
 
             <div id="divider"></div>
-            <div id="prev" class="arrow">‹</div>
+            <div id="prev" class="arrow" onclick="updateCurrentPage(-1)">‹</div>
             <div id="viewer"></div>
-            <div id="next" class="arrow">›</div>
+            <div id="next" class="arrow" onclick="updateCurrentPage(1)">›</div>
 
             <div id="loader"><img src="img/loader.gif"></div>
         </div>

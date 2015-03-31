@@ -177,27 +177,30 @@ class BookHandler(MainPage):
 class UpdateStats(MainPage):
     def get(self, stuff):
 	    #mostly place holder
-        User = self.request.get('User')
-        Isbn = self.request.get('isbn')
-        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
-        returnRecord = {} 
-        for record in q.run(limit = 1):
-            returnRecord.append(record.dict())
+        inUser = self.request.get('user')
+        inISBN = self.request.get('isbn')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE owner = :1 AND isbn = :2", inUser, int(inISBN))
+      
+        returnRecord = q.get()
+        if not returnRecord:
+            returnRecord = Stat(isbn = int(inISBN), owner = inUser, timeSpentReading = int(0), bookmark = int(1))
+            db.put(returnRecord)
         self.response.headers.add_header('Access-Control-Allow-Origin', '*')
         self.response.out.headers['Content-Type'] = "text/json"
-        self.response.out.write(json.dumps(returnRecord))
+        logging.info(returnRecord)
+        self.response.out.write(json.dumps(returnRecord.dict()))
         return
     def post(self, stuff):
-        User = self.request.get('User')
-        Isbn = self.request.get('isbn')
-        Bookmark = self.request.get('Bookmark')
-        PagesRead = self.request.get('pagesRead')
-        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE user = :1" + "WHERE isbn = :2", User,int(Isbn))
-        for record in q.run():
-            record.bookmark = int(Bookmark)
-            if(PagesRead > record.pagesRead):
-                record.pagesRead = PagesRead
-                db.put(record)
+        inUser = self.request.get('user')
+        inISBN = self.request.get('isbn')
+        inBookmark = self.request.get('bookmark')
+        inPagesRead = self.request.get('pagesRead')
+        q = db.GqlQuery("SELECT * FROM Stat " + "WHERE owner = :1 AND isbn = :2", inUser, int(inISBN))
+        for record in q.run(limit=1):
+            record.bookmark = int(inBookmark)
+            if(int(inPagesRead) > record.pagesRead):
+                record.pagesRead = int(inPagesRead)
+            db.put(record)
         return	
 #admin Side stat catalogue
 class StatQuery(MainPage):
