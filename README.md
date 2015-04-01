@@ -13,6 +13,6 @@ Former Members:
     Tiana Langer
     John Phillips  
    	
-To test our app please download a ZIP file and run it locally.
+To test our app please download a ZIP file and run it locally. Please note, you have to use a browser that allows cross-domain requests (i.e. Safari)
 
 To test our Administrator View visit www.cockyreaders-test.appspot.com/
