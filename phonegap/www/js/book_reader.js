@@ -56,7 +56,6 @@ function openToPage(currentPage) {
             reader.book.nextPage();
         }
     }, 1000);
-    
 }
 
 function updateCurrentPage(addition) {
