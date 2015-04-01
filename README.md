@@ -13,5 +13,6 @@ Former Members:
     Tiana Langer
     John Phillips  
    	
-To test our app visit www.cse.sc.edu/~bainco/cockyreaders/
+To test our app visit please download a ZIP file and run it locally.
+
 To test our Administrator View visit www.cockyreaders-test.appspot.com/
