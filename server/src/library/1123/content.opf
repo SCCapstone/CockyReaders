@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Lear, Edward, 1812-1888</dc:creator>
+      <dc:title>Nonsense Drolleries: The Owl &amp; The Pussy-Cat—The Duck &amp; The Kangaroo.</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg20113</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="20113-h.htm" media-type="application/xhtml+xml"/>
+      <item id="iimage_04" href="images/image_04.jpg" media-type="image/jpeg"/>
+      <item id="iimage_03" href="images/image_03.jpg" media-type="image/jpeg"/>
+      <item id="iimage_02" href="images/image_02.jpg" media-type="image/jpeg"/>
+      <item id="iimage_01" href="images/image_01.jpg" media-type="image/jpeg"/>
+      <item id="iimage_15" href="images/image_15.jpg" media-type="image/jpeg"/>
+      <item id="iimage_14" href="images/image_14.jpg" media-type="image/jpeg"/>
+      <item id="iback" href="images/back.jpg" media-type="image/jpeg"/>
+      <item id="icover" href="images/cover.jpg" media-type="image/jpeg"/>
+      <item id="iimage_05" href="images/image_05.jpg" media-type="image/jpeg"/>
+      <item id="iimage_06" href="images/image_06.jpg" media-type="image/jpeg"/>
+      <item id="iimage_07" href="images/image_07.jpg" media-type="image/jpeg"/>
+      <item id="iimage_08" href="images/image_08.jpg" media-type="image/jpeg"/>
+      <item id="iimage_10" href="images/image_10.jpg" media-type="image/jpeg"/>
+      <item id="iimage_11" href="images/image_11.jpg" media-type="image/jpeg"/>
+      <item id="iimage_13" href="images/image_13.jpg" media-type="image/jpeg"/>
+      <item id="iimage_12" href="images/image_12.jpg" media-type="image/jpeg"/>
+      <item id="iimage_09" href="images/image_09.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>
