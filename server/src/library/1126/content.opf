@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Crosland, T. W. H.</dc:creator>
+      <dc:title>The Old Man's Bag</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23485</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23485-h.htm" media-type="application/xhtml+xml"/>
+      <item id="i001" href="images/001.jpg" media-type="image/jpeg"/>
+      <item id="i002" href="images/002.jpg" media-type="image/jpeg"/>
+      <item id="i003" href="images/003.jpg" media-type="image/jpeg"/>
+      <item id="i004" href="images/004.jpg" media-type="image/jpeg"/>
+      <item id="i005" href="images/005.jpg" media-type="image/jpeg"/>
+      <item id="i006" href="images/006.jpg" media-type="image/jpeg"/>
+      <item id="i007" href="images/007.jpg" media-type="image/jpeg"/>
+      <item id="i008" href="images/008.jpg" media-type="image/jpeg"/>
+      <item id="i009" href="images/009.jpg" media-type="image/jpeg"/>
+      <item id="i010" href="images/010.jpg" media-type="image/jpeg"/>
+      <item id="i011" href="images/011.jpg" media-type="image/jpeg"/>
+      <item id="i012" href="images/012.jpg" media-type="image/jpeg"/>
+      <item id="icover" href="images/cover.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

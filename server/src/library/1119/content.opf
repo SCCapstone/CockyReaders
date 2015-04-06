@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Anonymous</dc:creator>
+      <dc:title>Dame Wonder's Picture Alphabet: Amusing Alphabet, Dame Wonder's Series.</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-US</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23483</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23483-h.htm" media-type="application/xhtml+xml"/>
+      <item id="iillus-0001-t" href="images/illus-0001-t.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0003" href="images/illus-0003.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0003-t" href="images/illus-0003-t.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0010" href="images/illus-0010.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0004-t" href="images/illus-0004-t.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0004" href="images/illus-0004.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0006" href="images/illus-0006.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0007" href="images/illus-0007.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0008" href="images/illus-0008.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0005" href="images/illus-0005.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0009" href="images/illus-0009.jpg" media-type="image/jpeg"/>
+      <item id="iillus-0001" href="images/illus-0001.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>
