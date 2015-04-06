@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>March, Eleanor S.</dc:creator>
+      <dc:title>Little White Barbara</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23399</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23399-h.htm" media-type="application/xhtml+xml"/>
+      <item id="icover" href="images/cover.jpg" media-type="image/jpeg"/>
+      <item id="ipic12" href="images/pic12.jpg" media-type="image/jpeg"/>
+      <item id="ipic02" href="images/pic02.jpg" media-type="image/jpeg"/>
+      <item id="ipic01" href="images/pic01.jpg" media-type="image/jpeg"/>
+      <item id="ipic03" href="images/pic03.jpg" media-type="image/jpeg"/>
+      <item id="ipic04" href="images/pic04.jpg" media-type="image/jpeg"/>
+      <item id="ipic05" href="images/pic05.jpg" media-type="image/jpeg"/>
+      <item id="ipic06" href="images/pic06.jpg" media-type="image/jpeg"/>
+      <item id="ipic07" href="images/pic07.jpg" media-type="image/jpeg"/>
+      <item id="ipic08" href="images/pic08.jpg" media-type="image/jpeg"/>
+      <item id="ipic09" href="images/pic09.jpg" media-type="image/jpeg"/>
+      <item id="ipic10" href="images/pic10.jpg" media-type="image/jpeg"/>
+      <item id="ipic11" href="images/pic11.jpg" media-type="image/jpeg"/>
+      <item id="ipic13" href="images/pic13.jpg" media-type="image/jpeg"/>
+      <item id="ipic14" href="images/pic14.jpg" media-type="image/jpeg"/>
+      <item id="ipic15" href="images/pic15.jpg" media-type="image/jpeg"/>
+      <item id="ipic16" href="images/pic16.jpg" media-type="image/jpeg"/>
+      <item id="ipic17" href="images/pic17.jpg" media-type="image/jpeg"/>
+      <item id="ipic18" href="images/pic18.jpg" media-type="image/jpeg"/>
+      <item id="ipic19" href="images/pic19.jpg" media-type="image/jpeg"/>
+      <item id="ipic20" href="images/pic20.jpg" media-type="image/jpeg"/>
+      <item id="ipic21" href="images/pic21.jpg" media-type="image/jpeg"/>
+      <item id="ipic22" href="images/pic22.jpg" media-type="image/jpeg"/>
+      <item id="ipic23" href="images/pic23.jpg" media-type="image/jpeg"/>
+      <item id="ipic24" href="images/pic24.jpg" media-type="image/jpeg"/>
+      <item id="ipublogo" href="images/publogo.gif" media-type="image/gif"/>
+      <item id="idivider" href="images/divider.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

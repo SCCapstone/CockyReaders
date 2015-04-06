@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Anonymous</dc:creator>
+      <dc:title>The Crooked Man and Other Rhymes</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23305</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23305-h.htm" media-type="application/xhtml+xml"/>
+      <item id="icover" href="images/cover.png" media-type="image/png"/>
+      <item id="iimg08" href="images/img08.png" media-type="image/png"/>
+      <item id="iimg04" href="images/img04.png" media-type="image/png"/>
+      <item id="iimg07" href="images/img07.png" media-type="image/png"/>
+      <item id="iimg06" href="images/img06.png" media-type="image/png"/>
+      <item id="iimg03" href="images/img03.png" media-type="image/png"/>
+      <item id="iimg10" href="images/img10.png" media-type="image/png"/>
+      <item id="iimg05" href="images/img05.png" media-type="image/png"/>
+      <item id="iimg09" href="images/img09.png" media-type="image/png"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

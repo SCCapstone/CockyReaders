@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Leighton, John, 1822-1912</dc:creator>
+      <dc:title>The Royal Picture Alphabet</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23619</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23619-h.htm" media-type="application/xhtml+xml"/>
+      <item id="ihand" href="images/hand.png" media-type="image/png"/>
+      <item id="ii-004" href="images/i-004.jpg" media-type="image/jpeg"/>
+      <item id="ii-003" href="images/i-003.jpg" media-type="image/jpeg"/>
+      <item id="ii-009" href="images/i-009.jpg" media-type="image/jpeg"/>
+      <item id="ii-008" href="images/i-008.jpg" media-type="image/jpeg"/>
+      <item id="ii-007" href="images/i-007.jpg" media-type="image/jpeg"/>
+      <item id="ii-005" href="images/i-005.jpg" media-type="image/jpeg"/>
+      <item id="ii-006" href="images/i-006.jpg" media-type="image/jpeg"/>
+      <item id="ii-010" href="images/i-010.jpg" media-type="image/jpeg"/>
+      <item id="ii-011" href="images/i-011.jpg" media-type="image/jpeg"/>
+      <item id="ii-012" href="images/i-012.jpg" media-type="image/jpeg"/>
+      <item id="ii-013" href="images/i-013.jpg" media-type="image/jpeg"/>
+      <item id="ii-014" href="images/i-014.jpg" media-type="image/jpeg"/>
+      <item id="ii-015" href="images/i-015.jpg" media-type="image/jpeg"/>
+      <item id="ii-016" href="images/i-016.jpg" media-type="image/jpeg"/>
+      <item id="ii-017" href="images/i-017.jpg" media-type="image/jpeg"/>
+      <item id="ii-018" href="images/i-018.jpg" media-type="image/jpeg"/>
+      <item id="ii-019" href="images/i-019.jpg" media-type="image/jpeg"/>
+      <item id="ii-020" href="images/i-020.jpg" media-type="image/jpeg"/>
+      <item id="ii-021" href="images/i-021.jpg" media-type="image/jpeg"/>
+      <item id="ii-022" href="images/i-022.jpg" media-type="image/jpeg"/>
+      <item id="ii-023" href="images/i-023.jpg" media-type="image/jpeg"/>
+      <item id="ii-024" href="images/i-024.jpg" media-type="image/jpeg"/>
+      <item id="ii-025" href="images/i-025.jpg" media-type="image/jpeg"/>
+      <item id="ii-026" href="images/i-026.jpg" media-type="image/jpeg"/>
+      <item id="ibackcover" href="images/backcover.jpg" media-type="image/jpeg"/>
+      <item id="ii-002" href="images/i-002.jpg" media-type="image/jpeg"/>
+      <item id="icover" href="images/cover.jpg" media-type="image/jpeg"/>
+      <item id="ii-001" href="images/i-001.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

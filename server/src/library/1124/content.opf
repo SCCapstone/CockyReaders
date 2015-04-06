@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Barksdale, Lena E.</dc:creator>
+      <dc:title>The Chickens of Fowl Farm</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23943</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23943-h.htm" media-type="application/xhtml+xml"/>
+      <item id="iill-01" href="images/ill-01.png" media-type="image/png"/>
+      <item id="iill-14" href="images/ill-14.jpg" media-type="image/jpeg"/>
+      <item id="iill-12" href="images/ill-12.jpg" media-type="image/jpeg"/>
+      <item id="iill-06" href="images/ill-06.jpg" media-type="image/jpeg"/>
+      <item id="iill-22" href="images/ill-22.jpg" media-type="image/jpeg"/>
+      <item id="iill-16" href="images/ill-16.jpg" media-type="image/jpeg"/>
+      <item id="iill-33" href="images/ill-33.jpg" media-type="image/jpeg"/>
+      <item id="iill-26" href="images/ill-26.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

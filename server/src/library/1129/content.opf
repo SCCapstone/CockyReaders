@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Anonymous</dc:creator>
+      <dc:title>The Three Bears</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23322</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23322-h.htm" media-type="application/xhtml+xml"/>
+      <item id="cover" href="images/cover.jpg" media-type="image/jpeg"/>
+      <item id="i-4" href="images/i-4.jpg" media-type="image/jpeg"/>
+      <item id="i-6" href="images/i-6.jpg" media-type="image/jpeg"/>
+      <item id="i-9" href="images/i-9.jpg" media-type="image/jpeg"/>
+      <item id="i-10" href="images/i-10.jpg" media-type="image/jpeg"/>
+      <item id="i-13" href="images/i-13.jpg" media-type="image/jpeg"/>
+      <item id="i-15" href="images/i-15.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>

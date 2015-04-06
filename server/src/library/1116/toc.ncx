@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en">
+   <head xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/">
+      <meta name="dtb:uid" content="http://www.snee.com/epub/pg23436"/>
+      <meta name="dtb:depth" content="1"/>
+      <meta name="dtb:totalPageCount" content="0"/>
+      <meta name="dtb:maxPageNumber" content="0"/>
+   </head>
+   <docTitle xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/">
+      <text>Aladdin or The Wonderful Lamp</text>
+   </docTitle>
+   <navMap xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/">
+      <navPoint id="navpoint-1" playOrder="1">
+         <navLabel>
+            <text>Aladdin or The Wonderful Lamp</text>
+         </navLabel>
+         <content src="23436-h.htm"/>
+      </navPoint>
+   </navMap>
+</ncx>

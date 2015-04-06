@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.0"
+         unique-identifier="bookid">
+   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:creator>Anonymous</dc:creator>
+      <dc:title>Aladdin or The Wonderful Lamp</dc:title>
+      <dc:language xsi:type="dcterms:RFC3066">en-GB</dc:language>
+      <dc:rights>Public Domain</dc:rights>
+      <dc:publisher>Project Gutenberg (epub version: Bob DuCharme)</dc:publisher>
+      <dc:identifier id="bookid">http://www.snee.com/epub/pg23436</dc:identifier>
+   </metadata>
+   <manifest xmlns:opf="http://www.idpf.org/2007/opf">
+      <item id="ncx" href="toc.ncx" media-type="text/xml"/>
+      <item id="main" href="23436-h.htm" media-type="application/xhtml+xml"/>
+      <item id="illu_02_th" href="images/illu_02_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_02" href="images/illu_02.jpg" media-type="image/jpeg"/>
+      <item id="illu_03_th" href="images/illu_03_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_03" href="images/illu_03.jpg" media-type="image/jpeg"/>
+      <item id="illu_04_th" href="images/illu_04_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_04" href="images/illu_04.jpg" media-type="image/jpeg"/>
+      <item id="illu_05_th" href="images/illu_05_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_05" href="images/illu_05.jpg" media-type="image/jpeg"/>
+      <item id="illu_06_th" href="images/illu_06_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_06" href="images/illu_06.jpg" media-type="image/jpeg"/>
+      <item id="illu_07_th" href="images/illu_07_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_07" href="images/illu_07.jpg" media-type="image/jpeg"/>
+      <item id="illu_08_th" href="images/illu_08_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_08" href="images/illu_08.jpg" media-type="image/jpeg"/>
+      <item id="illu_01_th" href="images/illu_01_th.jpg" media-type="image/jpeg"/>
+      <item id="illu_01" href="images/illu_01.jpg" media-type="image/jpeg"/>
+      <item id="titlepage_th" href="images/titlepage_th.jpg" media-type="image/jpeg"/>
+      <item id="titlepage" href="images/titlepage.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="main"/>
+   </spine>
+</package>
