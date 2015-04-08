@@ -18,57 +18,14 @@
         <!-- Render -->
         <script src="js/epub.min.js"></script>
 
-        <!-- Hooks -->
-        <script src="js/hooks.min.js"></script> 
-
-        <!-- Reader -->
-        <script src="js/reader.min.js"></script>
-
-        <!-- Plugins -->
-        <script src="js/plugins/search.js"></script>
-
-        <!-- Highlights -->
-        <script src="js/libs/jquery.highlight.js"></script>
-        <script src="js/hooks/extensions/highlight.js"></script>
-
-        <!-- File Storage -->
-        <!-- <script src="js/libs/fileStorage.min.js"></script> -->
-
-        <!-- Full Screen -->
-        <script src="js/libs/screenfull.min.js"></script>
         <script src="js/book_reader.js"></script>
     </head>
     <body>
         <div id="main">
-            <div id="titlebar">
-                <div id="opener">
-                    <a id="slider" class="icon-menu" href="bookshelf.html">Menu</a>
-                </div>
-                <div id="metainfo">
-                  <!-- </11>  <span id="book-title"></span>
-                    <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
-                    <span id="chapter-title"></span>-->
-                </div>
-                <div id="title-controls">
-                    <a id="setting" class="icon-cog">Settings</a>
-                </div>
-            </div>
-
-            <div id="divider"></div>
-            <div id="prev" class="arrow" onclick="updateCurrentPage(-1)">‹</div>
-            <div id="viewer"></div>
-            <div id="next" class="arrow" onclick="updateCurrentPage(1)">›</div>
-
-            <div id="loader"><img src="img/loader.gif"></div>
+          <div id="prev" onclick="window.location.href = 'bookshelf.html';" class="menu-button">X</div>
+          <div id="prev" onclick="Book.prevPage(); updateCurrentPage(-1)" class="right-arrow">‹</div>
+          <div id="area" style="padding: 32px 48px 32px 48px;"></div>
+          <div id="next" onclick="Book.nextPage(); updateCurrentPage(1);"class="left-arrow">›</div>
         </div>
-        <div class="modal md-effect-1" id="settings-modal">
-            <div class="md-content">
-                <h3>Settings</h3>
-                <div>
-                </div>
-                <div class="closer icon-cancel-circled"></div>
-            </div>
-        </div>
-    <div class="overlay"></div>
     </body>
 </html>

@@ -53,7 +53,7 @@ function openToPage(currentPage) {
     setTimeout(function() {
         console.log("Page to page " + currentPage);
         for(i = 1; i < currentPage; i++) {
-            reader.book.nextPage();
+            Book.nextPage();
         }
     }, 1000);
 }
@@ -63,7 +63,7 @@ function updateCurrentPage(addition) {
     POST_Stats();
 }
 
-var reader;
+var Book;
 var user;
 var bookURL;
 var flag = false;
@@ -76,8 +76,10 @@ document.onreadystatechange = function () {
         EPUBJS.cssPath = "css/";
 
         bookURL = getCookie("bookURL");
-        reader = ePubReader(bookURL, { width: 1041, height: 768, restore: false, fixedLayout : false });
+        Book = ePub(bookURL, { width: 928, height: 704, restore: false});
         user = getCookie("user");
+        
+        Book.renderTo("area");
         GET_Stats();
     } 
     }
