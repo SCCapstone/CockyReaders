@@ -4,7 +4,8 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
-handlers:    
+handlers:  
+  
 - url: /img
   static_dir: img/
    

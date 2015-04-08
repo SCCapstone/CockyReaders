@@ -27,11 +27,17 @@ html,body {
 	height: 2.5em;
 }
 
-.right {
-	text-align: right;
-	padding: 10px;
+#left {
+     padding: 3px;
+    float:left;
 }
 
+
+#right {
+    text-align: right;
+    padding: 10px;
+}
+        
 #header a {
 	text-decoration: none;
 	color: #fff;
