@@ -14,7 +14,7 @@
 		<div id="header">
 			<div class="right">
 					{% if user %}
-						<a href="/board"> <img src="/images/home_icon.png" alt="home icon" style="width:50px;height:50px"> </a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
+						<a href="/board"> <img src="/img/home_icon.png" alt="home icon" style="width:50px;height:50px"> </a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
 					{% else %}
 						<a href='{{ login }}'>Login</a>
 				    {% endif %}

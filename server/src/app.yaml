@@ -1,10 +1,12 @@
 application: cockyreaders-test
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
 
-handlers:
+handlers:    
+- url: /img
+  static_dir: img/
    
 - url: /css
   static_dir: css/
