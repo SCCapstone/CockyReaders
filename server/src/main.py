@@ -116,7 +116,7 @@ class LoginHandler(MainPage):
                               password = newUserPassword,
                               teacher = newUserTeacher,
                               grade = int(newUserGrade),
-                              bookList = [1113, 1114])
+                              bookList = [1113, 1114, 1115, 1116 , 1117, 1119, 1120, 1121, 1123])
             newUser.put()   
             newStat = Stat(parent = newUser, isbn = 1113, owner = newUserName, pagesRead = 0, bookmark = 1)
             newStat.put()
@@ -239,7 +239,6 @@ class StudentHandler(MainPage):
         Password = self.request.get('password')
         teacher = self.request.get('teacher')
         grade = self.request.get('grade')
-		
 
         newStudent = Student(firstName = fName,
                              lastName = lName,
