@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Ebook Reader</title>
         <meta name="description" content="">
-       <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=1024, height=768, target-densitydpi=device-dpi" />        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=1024, height=768" />        
+        <meta name="apple-mobile-web-app-capable" content="yes">
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
@@ -38,29 +39,15 @@
         <script src="js/book_reader.js"></script>
     </head>
     <body>
-        <div id="sidebar">
-            <div id="panels">
-                <input id="searchBox" placeholder="search" type="search">
-                <a id="show-Search" class="show_view icon-search" data-view="Search">Search</a>
-                <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>         
-            </div>
-
-            <div id="searchView" class="view">
-                <ul id="searchResults"></ul>
-            </div>
-            <div id="bookmarksView" class="view">
-                <ul id="bookmarks"></ul>
-            </div>
-        </div>
         <div id="main">
             <div id="titlebar">
                 <div id="opener">
                     <a id="slider" class="icon-menu" href="bookshelf.html">Menu</a>
                 </div>
                 <div id="metainfo">
-                    <span id="book-title"></span>
+                  <!-- </11>  <span id="book-title"></span>
                     <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
-                    <span id="chapter-title"></span>
+                    <span id="chapter-title"></span>-->
                 </div>
                 <div id="title-controls">
                     <a id="setting" class="icon-cog">Settings</a>
@@ -78,7 +65,6 @@
             <div class="md-content">
                 <h3>Settings</h3>
                 <div>
-                    <p><input type="checkbox" id="sidebarReflow" name="sidebarReflow">Reflow text on rotate.</input></p>
                 </div>
                 <div class="closer icon-cancel-circled"></div>
             </div>

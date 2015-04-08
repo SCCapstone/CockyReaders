@@ -76,7 +76,7 @@ document.onreadystatechange = function () {
         EPUBJS.cssPath = "css/";
 
         bookURL = getCookie("bookURL");
-        reader = ePubReader(bookURL, { width: 1024, height: 768, restore: false });
+        reader = ePubReader(bookURL, { width: 1041, height: 768, restore: false, fixedLayout : false });
         user = getCookie("user");
         GET_Stats();
     } 
