@@ -37,7 +37,7 @@ function updateBookcase() {
         div2.style.fontSize = ".1px"
         div2.style.overflow = "hidden";
         div2.style.padding = "0px";
-        div2.style.width = "111px";
+        //div2.style.width = "111px";
         div2.style.height = "150px";
         div2.style.margin = "5px";
         div2.style.border = "0px none rgb(0, 147, 204)";

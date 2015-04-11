@@ -12,13 +12,16 @@
 
 	<div id="page">
 		<div id="header">
-			<div class="right">
+			
+			<div id="left">
+			<a href="/board"> <img src="/img/home_icon.png" alt="home icon"> </a> 
+			</div>
+			<div id="right">
 					{% if user %}
-						<a href="/board"> <img src="/img/home_icon.png" alt="home icon" style="width:50px;height:50px"> </a> - <b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
+						<b>{{ user.email() }}</b> - <a href='{{ login }}'>Logout</a>
 					{% else %}
 						<a href='{{ login }}'>Login</a>
 				    {% endif %}
-				
                 </div>
 			</div>
 			<div id="title"><h1>{{ title }}</h1></div>
