@@ -11,6 +11,9 @@ handlers:
    
 - url: /css
   static_dir: css/
+  
+- url: /site
+  static_dir: site/
  
 - url: /js
   static_dir: js/
