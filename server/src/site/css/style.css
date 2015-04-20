@@ -33,12 +33,16 @@ body {
 	background:#ffffff;
 }
 .wrap {
-	width: 70%;
+    width: 70%;
 	margin: 0px auto;
-}
+ }
 .header{
-	padding:5% 0%;
+    background-color: black;
 	margin-bottom: 1%;
+    padding-left: 1%;
+    padding-top: 1%; 
+    padding-right: 4.25%;
+    width: 100%;
 }
 .logo{
 	float:left;
@@ -459,7 +463,7 @@ body {
 	list-style: none;
 	position: relative;
 	width: 60%;
-	margin: 6em auto 13em;
+	margin: 6em auto 0em;
 }
 .about-time-line li{
 	display: inline;
