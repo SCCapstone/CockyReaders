@@ -61,16 +61,16 @@ class MainPage(webapp2.RequestHandler):
     def ServerInitialize(self):
         global serverCheck 
         serverCheck = 1
-        #query = Book.all()
-        #if query.count() == 0:
-        #    newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
-        #    newBook.put()
-        #
-        #    newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
-        #    newBook.put()
- #
-        #    newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
-        #    newBook.put()
+        query = Book.all()
+        if query.count() == 0:
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
+            newBook.put()
+        
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
+            newBook.put()
+ 
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
+            newBook.put()
         return
 #class for login side of the app   
 class LoginHandler(MainPage):
