@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:6
+-keep class edu.sc.cockyreaders.CockyReaders { <init>(...); }
+

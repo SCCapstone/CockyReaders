@@ -1,0 +1,59 @@
+<!-- Registration Page -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Registration Page</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=1024, height=768, target-densitydpi=device-dpi" />	<meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log("ready");
+        });       
+    </script>
+  </head>
+  
+  <body style="overflow:hidden">
+      <div id="header"></div>
+  	<h1 style="font-family:Comic Sans MS; color:black; text-align:center">Register for a new account</h1>
+  
+  <!-- Change the action to take us to the login page so they can relogin -->
+  <form style="font-family:Comic Sans MS; padding-right:33.5%" align="right" id="registerForm">
+  	
+  	<font size="5">
+  	<!-- What is your first Name? -->
+  
+  	First Name: <input type="text" name="firstName" size="20" style="padding-bottom:10px; height:20px; font-size:18pt;font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	<br>
+  
+  	Last Name: <input type="text" name="lastName" size="20" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	<br>
+        
+	Username: <input type="text" name="user" size="20" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	<br>
+
+    Password: <input type="text" name="password" size="20" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	<br>
+
+  	<!-- Who is your teacher? -->
+
+	Teacher: <input type="text" name="teacher" size="20" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  	<br>
+  
+  	Lunch Pin:
+        <input type="text" name="pinNumber" size="20" style="padding-bottom:10px; height:20px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	<br>
+    <br>
+    What grade are you in?
+	<input type="number" name ="grade" min="0" max="5" style="align:center; padding-right:0%; height:30px; font-size:18pt; font-family:Comic Sans MS" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if (event.keyCode == 13) document.getElementById('registerButton').click()">
+	
+  	<br><br>
+	<input id="registerButton" style="text-align: center; font-size:18pt; height:100px; width:150px" type="button" value="I'm Done!" onclick="POST_Login();">
+  	</font>
+  </form>
+  
+  <div id="footer"></div>
+  </body>
+</html>
