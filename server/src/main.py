@@ -7,7 +7,8 @@ import webapp2
 import jinja2
 import os
 import json
-
+from google.appengine.ext import blobstore
+from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.api import users
 from google.appengine.ext import db
 from __builtin__ import int
@@ -16,8 +17,8 @@ jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
 #Host = "http://localhost:9080/"
 Host = "http://www.cockyreaders-test.appspot.com/"
-
-class MainPage(webapp2.RequestHandler):        
+serverCheck = 0 
+class MainPage(webapp2.RequestHandler):  
     def setupUser(self): 
         self.template_values = {}
         self.currentUser = users.get_current_user()  
@@ -26,7 +27,8 @@ class MainPage(webapp2.RequestHandler):
             self.template_values['login'] = users.create_logout_url("/")
         else:
             self.template_values['login'] = users.create_login_url(self.request.uri)
-   
+        global serverCheck;
+        self.template_values['servercheck'] = serverCheck;
     def setupJSON(self, objID):
         self.json = False
         if (self.request.get('fmt') == 'json'):
@@ -41,20 +43,11 @@ class MainPage(webapp2.RequestHandler):
         self.response.out.write(template.render(self.template_values))  
     
     def get(self):
-        self.setupUser(); 
-        #Remove this code after dataStore Objects are created		
-        query = Book.all();
-        #DEMO CODE
-        if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
-            newBook.put()
-        
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
-            newBook.put()
- 
-            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
-            newBook.put()
-            		
+        self.setupUser() 
+        #Remove this code after dataStore Objects are created
+        global serverCheck
+        if (serverCheck == 0):
+            self.ServerInitialize()	
         self.template_values['title'] = "Administrator View"
         self.render("main.html")    
         
@@ -65,17 +58,25 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/')
             return None
         return theStudent   
-#class for login side of the app        
+    def ServerInitialize(self):
+        global serverCheck 
+        serverCheck = 1
+        query = Book.all()
+        if query.count() == 0:
+            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
+            newBook.put()
+        
+            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
+            newBook.put()
+ 
+            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
+            newBook.put()
+        return
+#class for login side of the app   
 class LoginHandler(MainPage):
     def get(self, stuff):
         loginUser = self.request.get('user')
         loginPassword = self.request.get('password')
-            
-        #demo user
-        query = Student.all()
-        if query.count() == 0:
-            newStudent = Student(firstName="temp", lastName="temp", user="theFirst", password="password", bookList=[1113,1114])
-            newStudent.put()
         #this does now work properly unless the key_name of each entry is that of the UserName
         #currently the key_name is the student id		
         #key = db.Key.from_path('Student', loginUser )
@@ -135,10 +136,6 @@ class BookHandler(MainPage):
         self.setupJSON(bookID)
         loginUser = self.request.get('user')
         logging.debug("value of my var is %s", str(loginUser))
-        query = Student.all()
-        if (query.count() == 0):
-            newStudent = Student(firstName="temp", lastName="temp", userName="theFirst", password="password", books= [1113,1114])
-            newStudent.put()
         q = db.GqlQuery("SELECT * FROM Student " + "WHERE user = :1",loginUser)
         theStudent = Student()
         for p in q.run(limit=1):
@@ -147,21 +144,9 @@ class BookHandler(MainPage):
             libaryList = [1113,1114,1115]
         else:	
             libaryList = theStudent.bookList
-
-        query = Book.all();
-        #DEMO CODE
-        if query.count() == 0:
-            newBook = Book(title = "Sleeping Beauty", genre = "Fantasy", isbn = int(1113), cover = "img/book_1.jpg", link = Host+"library/1113/")
-            newBook.put()
-        
-            newBook = Book(title = "Moby Dick", genre = "Fantasy", isbn = int(1114), cover = "img/book_2.jpg", link = Host+"library/1114/")
-            newBook.put()
- 
-            newBook = Book(title = "Where The Wild Things Are", genre = "Fantasy", isbn = int(1115), cover= "img/book_3.jpg" , link = Host+"library/1115/")
-            newBook.put()
-            
-            query = Book.all()
-        
+        global serverCheck
+        if (serverCheck == 0):
+            self.ServerInitialize()
         if self.json:
             self.response.headers.add_header('Access-Control-Allow-Origin', '*')
             self.response.out.headers['Content-Type'] = "text/json"
@@ -222,7 +207,7 @@ class StudentHandler(MainPage):
     def get(self, studentID):
         self.setupUser()
                 
-        query = Student.all()
+        query = db.GqlQuery("SELECT * FROM Student " + "WHERE teacher = :1", users.get_current_user().nickname())
         logging.info(query.count())
                               
         self.template_values['students'] = query
@@ -244,7 +229,7 @@ class StudentHandler(MainPage):
                              lastName = lName,
 							 user = UserName,
 							 password = Password,
-                             teacher = teacher, 
+                             teacher = users.get_current_user().nickname(), 
                              grade = int(grade),
                              bookList=[1113,1114],
                              )
@@ -285,20 +270,43 @@ class AddBooks(MainPage):
             self.template_values['Returnsuccess'] = "Failure"
             self.render('booklist.html')
         return
+class BookUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+    def post(self):
+        try:
+            Title = self.request.get('title')
+            Isbn = self.request.get('isbn')
+            Genre = self.request.get('genre')
+            Cover = self.request.get('cover')
+            Link = self.request.get('link')
+            upload = self.get_uploads()[0]
+            new_book = Book(title = Title, genre = Genre, isbn = int(Isbn), cover = Cover.key(), downloadKey=upload.key())
+            new_book.put()
+            self.redirect('/')
+        except:
+            self.redirect('/libary')
+class BookDownloadHandler(blobstore_handlers.BlobstoreDownloadHandler):
+    def get(self, photo_key):
+        if not blobstore.get(photo_key):
+            self.error(404)
+        else:
+            self.send_blob(photo_key)
 #admin side global book catalogue
 class Libary(MainPage):
     def get(self, stuff):
 	#returns all the books in the libary
         self.setupUser()
         q = Book.all()
-        books = [] 
+        returnBook =[]
+        for book in q.run():
+            returnBook.append(book.dict());
 		#replace with template
         self.template_values['title']='Library'
-        self.template_values['books'] = q
+        self.template_values['books'] = returnBook
+        #upload_url = blobstore.create_upload_url('/upload_book')
+        #self.template_values['upload_url'] = upload_url
         self.render('libarylist.html')
-    def post(self, stuff):	
-	#note the book file should be transferred using standard ftp and then this record should be added
-	#do not post this first
+    def post(self, stuff):	              
+        #do not post this first
         Title = self.request.get('title')
         Isbn = self.request.get('isbn')
         Genre = self.request.get('genre')
@@ -340,6 +348,7 @@ class Book(db.Model):
     isbn = db.IntegerProperty()
     cover = db.StringProperty()
     link = db.StringProperty()
+    #downloadKey = blobstore.BlobReferenceProperty()
 
     def dict(self):
         theBookDict = {}
@@ -347,6 +356,7 @@ class Book(db.Model):
         theBookDict['genre'] = self.genre
         theBookDict['isbn'] = self.isbn
         theBookDict['cover'] = self.cover
+        #theBookDict['book'] = self.send_blob(self.downloadKey)
         theBookDict['link'] = self.link
         
         return theBookDict
@@ -372,4 +382,5 @@ app = webapp2.WSGIApplication([('/student()', StudentHandler), ('/student/(.*)',
 							   ('/addBook()',AddBooks), ('/addBook/(.*)',AddBooks),
 							   ('/libary()',Libary), ('/libary/(.*)', Libary),
 							   ('/stat()', StatQuery),('/stat/(.*)', StatQuery),
+							   #('/upload_book',BookUploadHandler),
                                ('/.*', MainPage)], debug=True)
